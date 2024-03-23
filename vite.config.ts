@@ -5,7 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 const manifest = {
     name: 'Habit Tracker',
     short_name: 'Habit Tracker',
-    theme_color: '#ffffff',
+    theme_color: '#212330',
+    background_color: '#212330',
     icons: [
         {
             src: 'pwa-64x64.png',

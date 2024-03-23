@@ -16,7 +16,7 @@
         "prettier": "prettier --check \"src/**/*.{ts,tsx}\"",
         "prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
         "prepare": "husky install",
-        "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png"
+        "generate-pwa-assets": "pwa-assets-generator"
     },
     "dependencies": {
         "eslint-config-airbnb-typescript": "^18.0.0",
