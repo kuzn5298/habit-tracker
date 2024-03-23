@@ -1,5 +1,3 @@
-const App: React.FC = () => {
-  return <div>Habit Tracker</div>;
-};
+const App: React.FC = () => <div>Habit Tracker</div>;
 
 export default App;
