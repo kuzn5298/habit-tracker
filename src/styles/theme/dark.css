@@ -1,0 +1,6 @@
+@layer base {
+    :root[data-theme="DARK"] {
+        --text-primary: 200 200 200;
+        --bg-primary: 20 20 20;
+    }
+}

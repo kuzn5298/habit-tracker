@@ -38,6 +38,13 @@ module.exports = {
                 endOfLine: 'auto',
             },
         ],
+        'react/prop-types': 'off',
     },
-    ignorePatterns: ['.eslintrc.cjs', 'vite.config.ts', 'pwa-assets.config.ts'],
+    ignorePatterns: [
+        '.eslintrc.cjs',
+        'vite.config.ts',
+        'pwa-assets.config.ts',
+        'tailwind.config.ts',
+        'postcss.config.js',
+    ],
 };

@@ -1,0 +1,6 @@
+@layer base {
+    :root[data-theme="LIGHT"] {
+        --text-primary: 20 20 20;
+        --bg-primary: 200 200 200;
+    }
+}

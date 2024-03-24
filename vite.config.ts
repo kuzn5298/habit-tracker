@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
+import { resolve } from 'path';
+
+const root = resolve(__dirname, 'src');
 
 const manifest = {
     name: 'Habit Tracker',
     short_name: 'Habit Tracker',
-    theme_color: '#212330',
     background_color: '#212330',
     icons: [
         {
@@ -39,8 +41,23 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+            includeAssets: [
+                'favicon.ico',
+                'apple-touch-icon.png',
+                'mask-icon.svg',
+            ],
             manifest,
         }),
     ],
+    resolve: {
+        alias: {
+            '@components': resolve(root, 'components'),
+            '@constants': resolve(root, 'constants'),
+            '@contexts': resolve(root, 'contexts'),
+            '@hooks': resolve(root, 'hooks'),
+            '@styles': resolve(root, 'styles'),
+            '@libs': resolve(root, 'libs'),
+            '@utils': resolve(root, 'utils'),
+        },
+    },
 });

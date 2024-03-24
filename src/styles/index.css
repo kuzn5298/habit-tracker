@@ -1,0 +1,10 @@
+@import "./theme";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    background-color: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+}
