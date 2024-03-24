@@ -19,8 +19,12 @@
         "generate-pwa-assets": "pwa-assets-generator"
     },
     "dependencies": {
+        "i18next": "^23.10.1",
+        "i18next-browser-languagedetector": "^7.2.0",
+        "i18next-http-backend": "^2.5.0",
         "react": "^18.3.0-canary-670811593-20240322",
-        "react-dom": "^18.3.0-canary-670811593-20240322"
+        "react-dom": "^18.3.0-canary-670811593-20240322",
+        "react-i18next": "^14.1.0"
     },
     "devDependencies": {
         "@types/react": "^18.2.66",

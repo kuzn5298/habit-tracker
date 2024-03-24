@@ -1,4 +1,7 @@
-import { defineConfig, minimal2023Preset } from '@vite-pwa/assets-generator/config';
+import {
+    defineConfig,
+    minimal2023Preset,
+} from '@vite-pwa/assets-generator/config';
 
 export default defineConfig({
     headLinkOptions: {
@@ -15,5 +18,5 @@ export default defineConfig({
             resizeOptions: { background: '#212330' },
         },
     },
-    images: ['public/favicon.svg'],
+    images: ['public/images/favicon.svg'],
 });
