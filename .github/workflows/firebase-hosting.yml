@@ -27,7 +27,7 @@ jobs:
                   echo '${{ secrets.ENV_FIREBASE_CONFIG }}' >> .env.local
 
             - name: Install dependencies
-              run: npm install
+              run: npm install --legacy-peer-deps
 
             - name: Cache dependencies
               uses: actions/cache@v2
