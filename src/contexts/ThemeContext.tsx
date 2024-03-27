@@ -1,12 +1,13 @@
 import {
     createContext,
-    useState,
     useCallback,
-    useMemo,
     useLayoutEffect,
+    useMemo,
+    useState,
 } from 'react';
-import { getTheme, isValidTheme, setTheme, setThemeToStorage } from '@utils';
-import { ThemeEnum } from '@constants';
+
+import { ThemeEnum } from '@/constants';
+import { getTheme, isValidTheme, setTheme, setThemeToStorage } from '@/utils';
 
 export interface IThemeContext {
     theme: ThemeEnum;
@@ -24,6 +25,21 @@ export const ThemeProvider: React.FC<IThemeProviderProps> = ({ children }) => {
 
     useLayoutEffect(() => {
         setTheme(contextTheme);
+    }, [contextTheme]);
+
+    useLayoutEffect(() => {
+        const listener = (e: MediaQueryListEvent) => {
+            setTheme(e.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT);
+        };
+
+        const useDark = window.matchMedia('(prefers-color-scheme: dark)');
+        if (contextTheme === ThemeEnum.SYSTEM) {
+            useDark.addEventListener('change', listener);
+        }
+
+        return () => {
+            useDark.removeEventListener('change', listener);
+        };
     }, [contextTheme]);
 
     const setNewContextTheme = useCallback((theme: ThemeEnum) => {

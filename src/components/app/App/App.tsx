@@ -1,7 +1,15 @@
-import { LanguageEnum, ThemeEnum } from '@constants';
-import { useLanguage, useTheme } from '@hooks';
-import { getOppositeTheme } from '@utils';
 import { useTranslation } from 'react-i18next';
+
+import {
+    Button,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui';
+import { LanguageEnum, ThemeEnum } from '@/constants';
+import { useLanguage, useTheme } from '@/hooks';
 
 const App: React.FC = () => {
     const { theme, setTheme } = useTheme();
@@ -11,32 +19,30 @@ const App: React.FC = () => {
     return (
         <div>
             <div className="flex items-center justify-between p-4">
-                <div className="text-3xl font-bold text-primary-text">
+                <div className="text-primary-text text-3xl font-bold">
                     Habit Tracker ({t('TEST')})
                 </div>
-                <button
-                    className="border p-2"
-                    type="button"
-                    onClick={() => setTheme(getOppositeTheme(theme))}
+                <Select
+                    value={theme}
+                    onValueChange={(e: ThemeEnum) => setTheme(e)}
                 >
-                    {theme === ThemeEnum.LIGHT ? 'Dark' : 'Light'}
-                </button>
+                    <SelectTrigger className="w-[150px]">
+                        <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value={ThemeEnum.LIGHT}>Light</SelectItem>
+                        <SelectItem value={ThemeEnum.DARK}>Dark</SelectItem>
+                        <SelectItem value={ThemeEnum.SYSTEM}>System</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
             <div className="flex justify-center gap-4">
-                <button
-                    onClick={() => changeLanguage(LanguageEnum.RUSSIAN)}
-                    className="border p-2"
-                    type="button"
-                >
-                    ru
-                </button>
-                <button
-                    onClick={() => changeLanguage(LanguageEnum.ENGLISH)}
-                    className="border p-2"
-                    type="button"
-                >
-                    en
-                </button>
+                <Button onClick={() => changeLanguage(LanguageEnum.RUSSIAN)}>
+                    🇷🇺 Russian
+                </Button>
+                <Button onClick={() => changeLanguage(LanguageEnum.ENGLISH)}>
+                    🇬🇧 English
+                </Button>
             </div>
         </div>
     );

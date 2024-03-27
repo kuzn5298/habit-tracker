@@ -1,9 +1,10 @@
 import { createContext, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageEnum } from '@constants';
-import { useSuspense } from '@hooks';
 
-import '@libs/i18n';
+import { LanguageEnum } from '@/constants';
+import { useSuspense } from '@/hooks';
+
+import '@/libs/i18n';
 
 export interface ILanguageContext {
     language: string;

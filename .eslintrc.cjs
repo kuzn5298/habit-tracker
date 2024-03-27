@@ -2,6 +2,7 @@ module.exports = {
     env: {
         browser: true,
         es2024: true,
+        node: true,
     },
     extends: [
         'airbnb',
@@ -11,8 +12,8 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
         'prettier',
+        'plugin:tailwindcss/recommended',
     ],
-    overrides: [],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 'latest',
@@ -39,6 +40,11 @@ module.exports = {
             },
         ],
         'react/prop-types': 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'react/require-default-props': 'off',
+        'tailwindcss/no-custom-classname': 'off',
+        'tailwindcss/classnames-order': 'error',
+        'import/extensions': 'off',
     },
     ignorePatterns: [
         '.eslintrc.cjs',
@@ -47,4 +53,5 @@ module.exports = {
         'tailwind.config.ts',
         'postcss.config.js',
     ],
+    settings: {},
 };

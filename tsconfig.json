@@ -19,15 +19,9 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
-            "@components": ["./src/components"],
-            "@constants": ["./src/constants"],
-            "@contexts": ["./src/contexts"],
-            "@hooks": ["./src/hooks"],
-            "@libs": ["./src/libs"],
-            "@styles": ["./src/styles"],
-            "@utils": ["./src/utils"]
+            "@/*": ["./src/*"]
         }
     },
     "include": ["src", ".eslintrc.cjs"],

@@ -4,7 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    background-color: rgb(var(--bg-primary));
-    color: rgb(var(--text-primary));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

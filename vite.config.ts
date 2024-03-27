@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
-const root = resolve(__dirname, 'src');
+const root = resolve(__dirname, './src');
 
 const manifest = {
     name: 'Habit Tracker',
@@ -51,13 +51,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@components': resolve(root, 'components'),
-            '@constants': resolve(root, 'constants'),
-            '@contexts': resolve(root, 'contexts'),
-            '@hooks': resolve(root, 'hooks'),
-            '@styles': resolve(root, 'styles'),
-            '@libs': resolve(root, 'libs'),
-            '@utils': resolve(root, 'utils'),
+            '@': root,
         },
     },
 });
