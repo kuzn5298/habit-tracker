@@ -1,26 +1,19 @@
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import { Button } from '@/components/ui';
-import { AppRouteEnum } from '@/constants';
-import { useAuth } from '@/hooks/useAuth';
+import { UserAuthForm } from './components/UserAuthForm';
 
 const Login: React.FC = () => {
-    const { onLogin } = useAuth();
+    const { t } = useTranslation('auth');
     return (
-        <div>
-            <h2 className="scroll-m-20 border-b px-6 py-2 text-3xl font-semibold tracking-tight first:mt-0">
-                Login
-            </h2>
-            <div className="mb-6 flex gap-4">
-                <Button variant="link" asChild>
-                    <Link to={AppRouteEnum.MAIN}>Habits</Link>
-                </Button>
-                <Button variant="link" asChild>
-                    <Link to={AppRouteEnum.VERIFICATION}>Verification</Link>
-                </Button>
-            </div>
-            <div>
-                <Button onClick={onLogin}>Login</Button>
+        <div className="container flex h-full items-center justify-center">
+            <div className="flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+                <div className="flex flex-col space-y-2 text-center">
+                    <h1 className="text-3xl font-bold">{t('SIGN_IN_TEXT')}</h1>
+                    <p className="text-balance text-sm text-muted-foreground sm:text-base">
+                        {t('SIGN_IN_DESCRIPTION')}
+                    </p>
+                </div>
+                <UserAuthForm />
             </div>
         </div>
     );

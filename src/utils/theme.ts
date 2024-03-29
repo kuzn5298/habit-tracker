@@ -1,5 +1,5 @@
 import { DEFAULT_THEME, THEME_STORAGE_NAME, ThemeEnum } from '@/constants';
-import { storage } from '@/libs';
+import storage from '@/libs/storage';
 
 export const isValidTheme = (theme: unknown): theme is ThemeEnum =>
     Object.values(ThemeEnum).includes(theme as ThemeEnum);

@@ -1,19 +1,16 @@
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui';
-import { AppRouteEnum } from '@/constants';
+
+import { useVerification } from './hook';
 
 const Verification: React.FC = () => {
+    const { t } = useTranslation('auth');
+    const { goToLogin } = useVerification();
+
     return (
-        <div>
-            <h2 className="scroll-m-20 border-b px-6 py-2 text-3xl font-semibold tracking-tight first:mt-0">
-                Verification
-            </h2>
-            <div>
-                <Button variant="link" asChild>
-                    <Link to={AppRouteEnum.LOGIN}>Login</Link>
-                </Button>
-            </div>
+        <div className="flex size-full items-center justify-center">
+            <Button onClick={goToLogin}>{t('GO_LOGIN_PAGE')}</Button>
         </div>
     );
 };

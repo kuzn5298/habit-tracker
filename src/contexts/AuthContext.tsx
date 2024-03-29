@@ -1,42 +1,46 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
+import { User as FirebaseUser } from 'firebase/auth';
 
-export interface IAuthContext {
+import { authService } from '@/services';
+
+export interface AuthContextValue {
     isAuthenticated: boolean;
-    user: object | null;
-    onLogin: () => void;
-    onLogout: () => void;
+    user: FirebaseUser | null;
 }
 
-export interface IAuthProviderProps {
+export interface AuthProviderProps {
     children: React.ReactNode;
 }
 
-export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+export const AuthContext = createContext<AuthContextValue>(
+    {} as AuthContextValue
+);
 
-export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState<object | null>(null);
+    const [user, setUser] = useState<FirebaseUser | null>(null);
 
-    const onLogin = useCallback(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setUser({});
+    useEffect(() => {
+        const authStateCallback = async (
+            userInformation: FirebaseUser | null
+        ) => {
+            setUser(userInformation);
             setLoading(false);
-        }, 1000);
-    }, []);
+        };
 
-    const onLogout = useCallback(() => {
-        setUser(null);
+        const unsubscribe =
+            authService.authStateChangeSubscription(authStateCallback);
+        return () => {
+            unsubscribe?.();
+        };
     }, []);
 
     const contextValue = useMemo(
         () => ({
             isAuthenticated: !!user,
             user,
-            onLogin,
-            onLogout,
         }),
-        [user, onLogin, onLogout]
+        [user]
     );
 
     if (loading) {

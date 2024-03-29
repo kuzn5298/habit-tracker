@@ -9,18 +9,20 @@ import {
 import { ThemeEnum } from '@/constants';
 import { getTheme, isValidTheme, setTheme, setThemeToStorage } from '@/utils';
 
-export interface IThemeContext {
+export interface ThemeContextValue {
     theme: ThemeEnum;
     setTheme: (theme: ThemeEnum) => void;
 }
 
-export interface IThemeProviderProps {
+export interface ThemeProviderProps {
     children: React.ReactNode;
 }
 
-export const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
+export const ThemeContext = createContext<ThemeContextValue>(
+    {} as ThemeContextValue
+);
 
-export const ThemeProvider: React.FC<IThemeProviderProps> = ({ children }) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [contextTheme, setContextTheme] = useState(getTheme);
 
     useLayoutEffect(() => {

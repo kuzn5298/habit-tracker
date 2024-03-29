@@ -14,6 +14,11 @@ i18n.use(Backend)
         interpolation: {
             escapeValue: false,
         },
+        backend: {
+            loadPath: '/locales/{{lng}}/{{ns}}.json',
+        },
+        ns: ['common', 'error', 'auth'],
+        defaultNS: 'common',
         detection: {
             caches: ['localStorage'],
             lookupLocalStorage: LANGUAGE_STORAGE_NAME,

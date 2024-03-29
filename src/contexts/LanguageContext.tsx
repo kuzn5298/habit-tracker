@@ -6,20 +6,20 @@ import { useSuspense } from '@/hooks';
 
 import '@/libs/i18n';
 
-export interface ILanguageContext {
+export interface LanguageContextValue {
     language: string;
     changeLanguage: (lng: LanguageEnum) => void;
 }
 
-export interface ILanguageProviderProps {
+export interface LanguageProviderProps {
     children: React.ReactNode;
 }
 
-export const LanguageContext = createContext<ILanguageContext>(
-    {} as ILanguageContext
+export const LanguageContext = createContext<LanguageContextValue>(
+    {} as LanguageContextValue
 );
 
-export const LanguageProvider: React.FC<ILanguageProviderProps> = ({
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     children,
 }) => {
     const { i18n } = useTranslation();
