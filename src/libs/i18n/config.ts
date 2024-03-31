@@ -10,7 +10,6 @@ i18n.use(Backend)
     .use(LanguageDetector)
     .init({
         fallbackLng: DEFAULT_LANGUAGE,
-        load: 'languageOnly',
         interpolation: {
             escapeValue: false,
         },
@@ -30,6 +29,7 @@ i18n.use(Backend)
                 'path',
                 'subdomain',
             ],
+            convertDetectedLanguage: (lng) => lng.split('-')[0],
         },
     });
 

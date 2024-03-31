@@ -1,11 +1,7 @@
 import { GitHubIcon, GoogleIcon } from '@/components/icons';
 import { ProviderEnum } from '@/constants';
 
-interface ProviderDetails {
-    id: ProviderEnum;
-    name: string;
-    icon: JSX.Element;
-}
+import { ProviderDetails } from '../types';
 
 const googleProvider: ProviderDetails = {
     id: ProviderEnum.GOOGLE,

@@ -1,4 +1,6 @@
 {
     "EMAIL_LABEL": "Email",
-    "EMAIL_PLACEHOLDER": "name@example.com"
+    "EMAIL_PLACEHOLDER": "name@example.com",
+    "EMAIL_REQUIRED": "Please enter an email address.",
+    "EMAIL_INVALID": "Please enter a valid email address."
 }

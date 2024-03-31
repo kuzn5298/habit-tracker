@@ -1,0 +1,5 @@
+{
+    "EMAIL_LABEL": "Почта",
+    "EMAIL_PLACEHOLDER": "name@example.com",
+    "EMAIL_REQUIRED": "Пожалуйста, введите адрес электронной почты."
+}

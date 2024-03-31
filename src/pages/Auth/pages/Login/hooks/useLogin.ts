@@ -1,18 +1,33 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { ProviderEnum, SIGN_IN_EMAIL_LOCAL_STORAGE } from '@/constants';
-import { getFirebaseCodeError } from '@/libs/firebase';
+import {
+    firebaseCodesMap,
+    ProviderEnum,
+    SIGN_IN_EMAIL_LOCAL_STORAGE,
+} from '@/constants';
+import { useToast } from '@/hooks';
+import { getFirebaseTranslationMessage } from '@/libs/firebase';
 import storage from '@/libs/storage';
 import { authService } from '@/services';
 
 type UseLoginReturn = {
     isLoading: boolean;
+    isInboxDialog: boolean;
     signInWithProvider: (provider: ProviderEnum) => Promise<void>;
     sendSignInLinkToEmail: (email: string) => Promise<void>;
+    closeInboxDialog: () => void;
 };
 
 export const useLogin = (): UseLoginReturn => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isInboxDialog, setInboxDialog] = useState(false);
+    const { toast } = useToast();
+    const { t } = useTranslation('errors');
+
+    const closeInboxDialog = useCallback(() => {
+        setInboxDialog(false);
+    }, []);
 
     const signInWithProvider = useCallback(
         async (provider: ProviderEnum): Promise<void> => {
@@ -20,14 +35,18 @@ export const useLogin = (): UseLoginReturn => {
                 setIsLoading(true);
                 await authService.signInWithProvider(provider);
             } catch (e) {
-                const code = getFirebaseCodeError(e);
-                // eslint-disable-next-line no-console
-                console.error('signInByProvider:', code);
+                const message = getFirebaseTranslationMessage(
+                    e,
+                    firebaseCodesMap,
+                    t
+                );
+                toast.error(message);
+                throw e;
             } finally {
                 setIsLoading(false);
             }
         },
-        []
+        [t, toast]
     );
 
     const sendSignInLinkToEmail = useCallback(
@@ -36,20 +55,26 @@ export const useLogin = (): UseLoginReturn => {
                 setIsLoading(true);
                 await authService.sendSignInLinkToEmail(email);
                 storage.set(SIGN_IN_EMAIL_LOCAL_STORAGE, email);
+                setInboxDialog(true);
             } catch (e) {
-                const code = getFirebaseCodeError(e);
-                // eslint-disable-next-line no-console
-                console.error('sendSignInLinkToEmail:', code);
+                const message = getFirebaseTranslationMessage(
+                    e,
+                    firebaseCodesMap,
+                    t
+                );
+                toast.error(message);
             } finally {
                 setIsLoading(false);
             }
         },
-        []
+        [t, toast]
     );
 
     return {
         isLoading,
+        isInboxDialog,
         signInWithProvider,
         sendSignInLinkToEmail,
+        closeInboxDialog,
     };
 };

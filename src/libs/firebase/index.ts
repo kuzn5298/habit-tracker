@@ -1,4 +1,4 @@
 export * from './firebase';
-export * from './helpers';
+export * from './utils';
 
 export { actionCodeConfig } from './firebase.config';
