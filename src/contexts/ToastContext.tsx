@@ -24,7 +24,6 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
             <Toaster
                 position="top-right"
                 className="toaster group"
-                duration={500000}
                 toastOptions={{
                     classNames: {
                         toast: 'toast group group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-lg',
@@ -34,8 +33,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
                         cancelButton:
                             'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
                         closeButton:
-                            'group-[.toast]:left-auto group-[.toast]:right-0 group-[.toast]:top-0 group-[.toast]:transform-none group-[.toast]:hover:bg-transparent',
-                        error: 'group-[.toaster]:bg-destructive  group-[.toaster]:border-destructive group-[.toaster]:text-destructive-foreground',
+                            'group-[.toast]:left-auto group-[.toast]:right-0 group-[.toast]:top-0 group-[.toast]:transform-none group-[.toast]:hover:bg-transparent group-[.toast]:border-0',
+                        error: 'group-[.toaster]:bg-destructive  group-[.toaster]:border-destructive group-[.toaster]:!text-destructive-foreground',
                         warning:
                             'group-[.toaster]:bg-warning  group-[.toaster]:border-warning group-[.toaster]:text-warning-foreground',
                         info: 'group-[.toaster]:bg-info  group-[.toaster]:border-info group-[.toaster]:text-info-foreground',
