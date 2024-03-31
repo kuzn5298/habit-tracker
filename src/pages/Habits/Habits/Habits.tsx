@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Button, Checkbox } from '@/components/ui';
 import { AppRouteEnum } from '@/constants';
+import { useToast } from '@/hooks';
 import { authService } from '@/services';
 import { cn } from '@/utils/ui';
 
@@ -31,6 +32,8 @@ const HABITS = [
 ];
 
 const Habits: React.FC = () => {
+    const { toast } = useToast();
+
     const onLogout = () => {
         authService.signOut();
     };
@@ -84,6 +87,61 @@ const Habits: React.FC = () => {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+                <Button onClick={() => toast('Event has been created')}>
+                    Default
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast('Event has been created', {
+                            description: 'Monday, January 3rd at 6:00pm',
+                        })
+                    }
+                >
+                    Description
+                </Button>
+                <Button onClick={() => toast.success('Event has been created')}>
+                    Success
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast.info(
+                            'Be at the area 10 minutes before the event time'
+                        )
+                    }
+                >
+                    Info
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast.warning(
+                            'Event start time cannot be earlier than 8am',
+                            {
+                                closeButton: true,
+                            }
+                        )
+                    }
+                >
+                    Warning
+                </Button>
+                <Button
+                    onClick={() => toast.error('Event has not been created')}
+                >
+                    Error
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast('Event has been created', {
+                            action: {
+                                label: 'Undo',
+                                onClick: () => console.log('Undo'),
+                            },
+                        })
+                    }
+                >
+                    Action
+                </Button>
             </div>
         </div>
     );
