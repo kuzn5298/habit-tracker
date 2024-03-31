@@ -32,7 +32,6 @@ export const useLogin = (): UseLoginReturn => {
     const signInWithProvider = useCallback(
         async (provider: ProviderEnum): Promise<void> => {
             try {
-                setIsLoading(true);
                 await authService.signInWithProvider(provider);
             } catch (e) {
                 const message = getFirebaseTranslationMessage(
@@ -41,9 +40,6 @@ export const useLogin = (): UseLoginReturn => {
                     t
                 );
                 toast.error(message);
-                throw e;
-            } finally {
-                setIsLoading(false);
             }
         },
         [t, toast]

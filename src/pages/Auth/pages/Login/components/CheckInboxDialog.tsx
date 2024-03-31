@@ -14,18 +14,16 @@ import { SIGN_IN_EMAIL_LOCAL_STORAGE } from '@/constants';
 import storage from '@/libs/storage';
 
 interface CheckInboxDialogProps {
-    open?: boolean;
     onClose?: () => void;
 }
 
 export const CheckInboxDialog: React.FC<CheckInboxDialogProps> = ({
-    open,
     onClose,
 }) => {
     const email = useMemo(() => storage.get(SIGN_IN_EMAIL_LOCAL_STORAGE), []);
     const { t } = useTranslation(['auth', 'common']);
     return (
-        <Dialog open={open} onOpenChange={onClose}>
+        <Dialog open onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>{t('CHECK_INBOX')}</DialogTitle>

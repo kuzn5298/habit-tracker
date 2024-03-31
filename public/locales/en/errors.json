@@ -2,6 +2,7 @@
     "FIREBASE_HTTP_SUPPORT": "HTTP protocol is not supported. Please use HTTPS.",
     "FIREBASE_POPUP_BLOCKED": "Popup has been blocked by the browser. Please allow popups for this website.",
     "FIREBASE_POPUP_CLOSED": "Popup has been closed by the user before finalizing the operation. Please try again.",
+    "FIREBASE_POPUP_CANCELED": "This operation has been cancelled due to another conflicting popup being opened.",
     "FIREBASE_INVALID_EMAIL": "This email address is invalid.",
     "FIREBASE_USER_DISABLED": "This email address is disabled by the administrator.",
     "FIREBASE_USER_NOT_FOUND": "This email address is not registered."

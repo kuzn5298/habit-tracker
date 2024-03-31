@@ -57,7 +57,7 @@ const Login: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <CheckInboxDialog open={isInboxDialog} onClose={closeInboxDialog} />
+            {isInboxDialog && <CheckInboxDialog onClose={closeInboxDialog} />}
         </>
     );
 };

@@ -3,7 +3,7 @@ import {
     onAuthStateChanged as firebaseOnAuthStateChanged,
     sendSignInLinkToEmail as firebaseSendSignInLinkToEmail,
     signInWithEmailLink as firebaseSignInWithEmailLink,
-    signInWithPopup as firebaseSignInWithRedirect,
+    signInWithPopup as firebaseSignInWithPopup,
     signOut as firebaseSignOut,
     User as FirebaseUser,
     Unsubscribe,
@@ -37,12 +37,12 @@ export const signInByEmailLink = async (
 
 // providers
 const signInWithGoogle = async (): Promise<FirebaseUser> => {
-    const { user } = await firebaseSignInWithRedirect(auth, googleProvider);
+    const { user } = await firebaseSignInWithPopup(auth, googleProvider);
     return user;
 };
 
 const signInWithGithub = async (): Promise<FirebaseUser> => {
-    const { user } = await firebaseSignInWithRedirect(auth, githubProvider);
+    const { user } = await firebaseSignInWithPopup(auth, githubProvider);
     return user;
 };
 
