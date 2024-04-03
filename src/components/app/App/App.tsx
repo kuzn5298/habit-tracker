@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 
+import { ViewLoading } from '@/components';
 import {
     AuthProvider,
     LanguageProvider,
@@ -14,7 +15,7 @@ const App: React.FC = () => {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <Suspense fallback="...global loading">
+                <Suspense fallback={<ViewLoading />}>
                     <LanguageProvider>
                         <AuthProvider>
                             <Router routes={APPLICATION_ROUTER} />

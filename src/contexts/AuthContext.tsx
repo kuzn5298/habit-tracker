@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 
+import { ViewLoading } from '@/components';
 import { authService } from '@/services';
 
 export interface AuthContextValue {
@@ -44,7 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     );
 
     if (loading) {
-        return <div>loading login</div>;
+        return <ViewLoading />;
     }
 
     return (

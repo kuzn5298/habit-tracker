@@ -1,6 +1,7 @@
 import React, { Suspense, useCallback } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import { ViewLoading } from '@/components';
 import { AppRouteEnum } from '@/constants';
 import { useBreakpoint } from '@/hooks';
 
@@ -34,13 +35,11 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ element, path }) => {
                     open: !pagePath,
                     onOpenChange: closeDialog,
                 },
-                <Suspense fallback={<div>dialog loading...</div>}>
+                <Suspense fallback={<ViewLoading className="min-h-[300px]" />}>
                     <Outlet />
                 </Suspense>
             )}
-            <Suspense fallback={<div>element loading...</div>}>
-                {element}
-            </Suspense>
+            <Suspense fallback={<ViewLoading />}>{element}</Suspense>
         </>
     );
 };
