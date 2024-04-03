@@ -6,3 +6,6 @@ export * from './checkbox';
 export * from './form';
 export * from './dialog';
 export * from './sonner';
+export * from './collapsible';
+export * from './switch';
+export * from './drawer';

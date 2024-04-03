@@ -5,12 +5,14 @@ export default {
     content: ['./src/**/*.{ts,tsx}'],
     prefix: '',
     theme: {
+        screens: {
+            sm: '480px',
+            md: '768px',
+            lg: '1024px',
+        },
         container: {
             center: true,
-            padding: '2rem',
-            screens: {
-                '2xl': '1400px',
-            },
+            padding: '1.5rem',
         },
         extend: {
             colors: {

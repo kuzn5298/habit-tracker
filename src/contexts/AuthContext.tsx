@@ -17,7 +17,7 @@ export const AuthContext = createContext<AuthContextValue>(
 );
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<FirebaseUser | null>(null);
 
     useEffect(() => {

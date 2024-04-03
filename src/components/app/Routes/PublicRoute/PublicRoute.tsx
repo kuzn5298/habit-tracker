@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { AppRouteEnum } from '@/constants';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks';
 
 export interface PublicRouteProps {
     element?: React.ReactNode;

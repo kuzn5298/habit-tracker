@@ -19,3 +19,9 @@
         overflow: hidden;
     }
 }
+
+@layer components {
+    .container {
+        @apply max-w-screen-lg;
+    }
+}

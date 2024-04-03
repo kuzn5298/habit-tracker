@@ -8,8 +8,8 @@ export enum AppRouteEnum {
     // Habits
     HABITS = '/habits',
     ADD_HABIT = '/habits/add',
-    EDIT_HABIT = '/habits/:habitId/edit',
     VIEW_HABIT = '/habits/:habitId',
+    EDIT_HABIT = '/habits/:habitId/edit',
 
     // Settings
     SETTINGS = '/settings',

@@ -1,7 +1,8 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 
+import { PageWrapper, PrivateRoute, PublicRoute } from '@/components/app';
 import { AppRouteEnum } from '@/constants';
-import { NotFound, PrivateRoute, PublicRoute } from '@/pages';
+import { HabitsList, NotFound, Settings } from '@/pages';
 
 import AUTH_ROUTES from './authRoutes';
 import HABITS_ROUTES from './habitsRoutes';
@@ -13,11 +14,31 @@ const APP_ROUTES: RouteObject[] = [
         children: AUTH_ROUTES,
     },
     {
-        element: <PrivateRoute />,
+        path: AppRouteEnum.HABITS,
+        element: (
+            <PrivateRoute
+                element={
+                    <PageWrapper
+                        element={<HabitsList />}
+                        path={AppRouteEnum.HABITS}
+                    />
+                }
+            />
+        ),
         children: HABITS_ROUTES,
     },
     {
-        element: <PrivateRoute />,
+        path: AppRouteEnum.SETTINGS,
+        element: (
+            <PrivateRoute
+                element={
+                    <PageWrapper
+                        element={<Settings />}
+                        path={AppRouteEnum.SETTINGS}
+                    />
+                }
+            />
+        ),
         children: SETTINGS_ROUTES,
     },
     {

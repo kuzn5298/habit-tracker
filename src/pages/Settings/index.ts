@@ -1,5 +1,5 @@
 import { lazy } from 'react';
 
-export const Language = lazy(() => import('./Language'));
-export const Settings = lazy(() => import('./Settings'));
-export const Theme = lazy(() => import('./Theme'));
+export const Settings = lazy(() => import('./pages/Settings'));
+export const LanguageSettings = lazy(() => import('./pages/Language'));
+export const ThemeSettings = lazy(() => import('./pages/Theme'));
