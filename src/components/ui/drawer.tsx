@@ -5,13 +5,22 @@ import { cn } from '@/utils/ui';
 
 const Drawer = ({
     shouldScaleBackground = true,
+    open,
     ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-    <DrawerPrimitive.Root
-        shouldScaleBackground={shouldScaleBackground}
-        {...props}
-    />
-);
+}: React.ComponentProps<typeof DrawerPrimitive.Root>) => {
+    return (
+        <>
+            {open && shouldScaleBackground && (
+                <meta name="theme-color" content="black" />
+            )}
+            <DrawerPrimitive.Root
+                shouldScaleBackground={shouldScaleBackground}
+                open={open}
+                {...props}
+            />
+        </>
+    );
+};
 Drawer.displayName = 'Drawer';
 
 const DrawerTrigger = DrawerPrimitive.Trigger;

@@ -21,7 +21,9 @@ const SwitchButton: React.FC<SwitchButtonProps> = ({
                 className
             )}
         >
-            <div className="flex-1 truncate text-base">{children}</div>
+            <span className="flex-1 truncate text-base font-medium">
+                {children}
+            </span>
             <Switch onCheckedChange={onChange} {...props} />
         </div>
     );
