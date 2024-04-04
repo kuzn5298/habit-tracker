@@ -1,43 +1,43 @@
-import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useOutletContext } from 'react-router-dom';
 
-import {
-    Button,
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui';
-import { AppRouteEnum, ThemeEnum } from '@/constants';
+import { PageContextValue } from '@/components/app';
+import { AVAILABLE_THEMES, THEMES_MAP } from '@/constants';
 import { useTheme } from '@/hooks';
+
+import { SettingsButton } from '../../components';
 
 const Theme: React.FC = () => {
     const { theme, setTheme } = useTheme();
+    const { setSubPageValue } = useOutletContext<PageContextValue>();
+    const { t } = useTranslation(['common', 'settings']);
+
+    useLayoutEffect(() => {
+        setSubPageValue({
+            title: t('settings:THEME_TEXT'),
+            closeButton: true,
+        });
+    }, [setSubPageValue, t]);
+
     return (
-        <div>
-            <h2 className="scroll-m-20 border-b px-6 py-2 text-3xl font-semibold tracking-tight first:mt-0">
-                Theme
-            </h2>
-            <div className="mb-6">
-                <Button variant="link" asChild>
-                    <Link to={AppRouteEnum.SETTINGS}>Settings</Link>
-                </Button>
-            </div>
-            <div className="px-6">
-                <Select
-                    value={theme}
-                    onValueChange={(e: ThemeEnum) => setTheme(e)}
-                >
-                    <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Theme" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value={ThemeEnum.LIGHT}>Light</SelectItem>
-                        <SelectItem value={ThemeEnum.DARK}>Dark</SelectItem>
-                        <SelectItem value={ThemeEnum.SYSTEM}>System</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+        <div className="flex flex-col gap-2">
+            {AVAILABLE_THEMES.map((themeItem) => {
+                const selected = theme === themeItem;
+                return (
+                    <SettingsButton
+                        key={themeItem}
+                        onClick={() => setTheme(themeItem)}
+                        endIcon={
+                            selected ? <Check size="1.25rem" /> : undefined
+                        }
+                        size="sm"
+                    >
+                        {t(THEMES_MAP[themeItem])}
+                    </SettingsButton>
+                );
+            })}
         </div>
     );
 };

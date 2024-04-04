@@ -1,4 +1,12 @@
 {
-    "OK": "OK",
-    "BACKUP": "BACK"
+    "OK": "Ok",
+    "BACK": "Black",
+    "CLOSE": "Close",
+
+    "ENGLISH_LANGUAGE": "English",
+    "RUSSIAN_LANGUAGE": "Русский",
+
+    "SYSTEM_THEME": "System",
+    "LIGHT_THEME": "Light",
+    "DARK_THEME": "Dark"
 }

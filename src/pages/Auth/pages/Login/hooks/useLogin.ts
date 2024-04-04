@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    firebaseCodesMap,
+    FIREBASE_CODES_MAP,
     ProviderEnum,
     SIGN_IN_EMAIL_LOCAL_STORAGE,
 } from '@/constants';
@@ -36,7 +36,7 @@ export const useLogin = (): UseLoginReturn => {
             } catch (e) {
                 const message = getFirebaseTranslationMessage(
                     e,
-                    firebaseCodesMap,
+                    FIREBASE_CODES_MAP,
                     t
                 );
                 toast.error(message);
@@ -55,7 +55,7 @@ export const useLogin = (): UseLoginReturn => {
             } catch (e) {
                 const message = getFirebaseTranslationMessage(
                     e,
-                    firebaseCodesMap,
+                    FIREBASE_CODES_MAP,
                     t
                 );
                 toast.error(message);

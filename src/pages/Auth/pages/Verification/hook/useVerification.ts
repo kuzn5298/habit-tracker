@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import {
     AppRouteEnum,
-    firebaseCodesMap,
+    FIREBASE_CODES_MAP,
     SIGN_IN_EMAIL_LOCAL_STORAGE,
 } from '@/constants';
 import { useSuspense, useToast } from '@/hooks';
@@ -31,7 +31,7 @@ export const useVerification = () => {
             } catch (e) {
                 const message = getFirebaseTranslationMessage(
                     e,
-                    firebaseCodesMap,
+                    FIREBASE_CODES_MAP,
                     t
                 );
                 toast.error(message);

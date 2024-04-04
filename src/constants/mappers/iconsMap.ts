@@ -10,7 +10,7 @@ import {
 
 import { MapObject } from '@/types';
 
-export const iconsMap: MapObject<string, LucideIcon> = {
+export const ICONS_MAP: MapObject<string, LucideIcon> = {
     'book-a': BookA,
     'book-t': BookType,
     steps: Footprints,

@@ -1,2 +1,2 @@
-export * from './SwitchButton';
 export * from './SettingsButton';
+export * from './SwitchButton';

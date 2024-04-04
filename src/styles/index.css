@@ -6,10 +6,10 @@
 
 @layer base {
     * {
-        @apply border-border;
+        @apply border-border ;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply text-foreground;
     }
 
     body > #root {
@@ -17,8 +17,14 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
+        @apply bg-background;
+    }
+
+    .disable-transition * {
+        @apply !transition-none;
     }
 }
+
 
 @layer components {
     .container {

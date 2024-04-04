@@ -2,8 +2,8 @@ import { create } from 'zustand';
 
 import storage from '@/libs/storage';
 
-const ANIMATION_STORAGE_NAME = 'isAnimation';
-const NOTIFICATION_STORAGE_NAME = 'isNotification';
+const ANIMATION_STORAGE_NAME = 'animation';
+const NOTIFICATION_STORAGE_NAME = 'notification';
 
 export interface SettingsStore {
     animation: boolean;

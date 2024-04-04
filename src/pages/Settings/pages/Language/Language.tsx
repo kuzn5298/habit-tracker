@@ -1,46 +1,43 @@
-import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useOutletContext } from 'react-router-dom';
 
-import {
-    Button,
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui';
-import { AppRouteEnum, LanguageEnum } from '@/constants';
+import { PageContextValue } from '@/components/app';
+import { AVAILABLE_LANGUAGES, LANGUAGES_MAP } from '@/constants';
 import { useLanguage } from '@/hooks';
+
+import { SettingsButton } from '../../components';
 
 const Language: React.FC = () => {
     const { language, changeLanguage } = useLanguage();
+    const { setSubPageValue } = useOutletContext<PageContextValue>();
+    const { t } = useTranslation(['common', 'settings']);
+
+    useLayoutEffect(() => {
+        setSubPageValue({
+            title: t('settings:LANGUAGE_TEXT'),
+            closeButton: true,
+        });
+    }, [setSubPageValue, t]);
+
     return (
-        <div>
-            <h2 className="scroll-m-20 border-b px-6 py-2 text-3xl font-semibold tracking-tight first:mt-0">
-                Language
-            </h2>
-            <div className="mb-6">
-                <Button variant="link" asChild>
-                    <Link to={AppRouteEnum.SETTINGS}>Settings</Link>
-                </Button>
-            </div>
-            <div className="px-6">
-                <Select
-                    value={language}
-                    onValueChange={(e: LanguageEnum) => changeLanguage(e)}
-                >
-                    <SelectTrigger className=" w-full">
-                        <SelectValue placeholder="Language" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value={LanguageEnum.ENGLISH}>
-                            English
-                        </SelectItem>
-                        <SelectItem value={LanguageEnum.RUSSIAN}>
-                            Russian
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+        <div className="flex flex-col gap-2">
+            {AVAILABLE_LANGUAGES.map((languageItem) => {
+                const selected = language === languageItem;
+                return (
+                    <SettingsButton
+                        key={languageItem}
+                        onClick={() => changeLanguage(languageItem)}
+                        endIcon={
+                            selected ? <Check size="1.25rem" /> : undefined
+                        }
+                        size="sm"
+                    >
+                        {t(LANGUAGES_MAP[languageItem])}
+                    </SettingsButton>
+                );
+            })}
         </div>
     );
 };

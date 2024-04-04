@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 
 import { Checkbox } from '@/components';
-import { colorsMap, iconsMap } from '@/constants';
+import { COLORS_MAP, ICONS_MAP } from '@/constants';
 import { cn } from '@/utils/ui';
 
 interface HabitCardProps {
@@ -21,7 +21,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({
 }) => {
     return (
         <div className="flex min-h-16 cursor-pointer items-center gap-4 rounded-lg border px-4 py-3 text-left text-sm transition-all hover:bg-accent">
-            {icon && createElement(iconsMap[icon])}
+            {icon && createElement(ICONS_MAP[icon])}
             <div className="grid flex-1 gap-0.5">
                 <p className="flex items-center gap-2 overflow-hidden text-sm font-medium leading-4">
                     <span className="truncate">{name}</span>
@@ -29,7 +29,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({
                         <span
                             className={cn(
                                 'flex min-w-2 h-2 rounded-full',
-                                colorsMap[color]
+                                COLORS_MAP[color]
                             )}
                         />
                     )}

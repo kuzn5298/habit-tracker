@@ -17,11 +17,11 @@ const SwitchButton: React.FC<SwitchButtonProps> = ({
     return (
         <div
             className={cn(
-                'flex items-center gap-4 rounded-md border p-4 min-h-16',
+                'flex items-center gap-4 rounded-md border p-4 min-h-16 bg-background',
                 className
             )}
         >
-            <div className="flex-1 text-base">{children}</div>
+            <div className="flex-1 truncate text-base">{children}</div>
             <Switch onCheckedChange={onChange} {...props} />
         </div>
     );

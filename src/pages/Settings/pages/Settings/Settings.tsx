@@ -9,7 +9,7 @@ import { AppRouteEnum } from '@/constants';
 import { authService } from '@/services';
 import { useSettingsStore } from '@/store';
 
-import { SettingsButton, SwitchButton } from './components';
+import { SettingsButton, SwitchButton } from '../../components';
 
 const Settings: React.FC = () => {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Settings: React.FC = () => {
                     {t('SETTINGS_TEXT')}
                 </span>
             </div>
-            <div className="flex flex-1 flex-col gap-3 overflow-auto">
+            <div className="flex flex-1 flex-col gap-3">
                 <SettingsButton
                     endIcon={<ChevronRight />}
                     onClick={() => navigate(AppRouteEnum.SETTINGS_THEME)}
