@@ -16,6 +16,9 @@ import {
     githubProvider,
     googleProvider,
 } from '@/libs/firebase';
+import { UserDetails } from '@/types';
+
+import { getUserDetails } from './userService';
 
 // email
 export const isSignInWithEmailLink = (): boolean =>
@@ -26,30 +29,30 @@ export const sendSignInLinkToEmail = (email: string): Promise<void> =>
 
 export const signInByEmailLink = async (
     email: string
-): Promise<FirebaseUser> => {
+): Promise<UserDetails> => {
     const { user } = await firebaseSignInWithEmailLink(
         auth,
         email,
         window.location.href
     );
-    return user;
+    return getUserDetails(user);
 };
 
 // providers
-const signInWithGoogle = async (): Promise<FirebaseUser> => {
+const signInWithGoogle = async (): Promise<UserDetails> => {
     const { user } = await firebaseSignInWithPopup(auth, googleProvider);
-    return user;
+    return getUserDetails(user);
 };
 
-const signInWithGithub = async (): Promise<FirebaseUser> => {
+const signInWithGithub = async (): Promise<UserDetails> => {
     const { user } = await firebaseSignInWithPopup(auth, githubProvider);
-    return user;
+    return getUserDetails(user);
 };
 
 // general
 export const signInWithProvider = async (
     provider: ProviderEnum
-): Promise<FirebaseUser> => {
+): Promise<UserDetails> => {
     switch (provider) {
         case ProviderEnum.GOOGLE:
             return signInWithGoogle();
@@ -62,12 +65,13 @@ export const signInWithProvider = async (
 
 // subscription
 export const authStateChangeSubscription = (
-    callback: (user: FirebaseUser | null) => void | Promise<void>
+    callback: (user: UserDetails | null) => void | Promise<void>
 ): Unsubscribe | null => {
     const unsubscribe = firebaseOnAuthStateChanged(
         auth,
         async (user: FirebaseUser | null): Promise<void> => {
-            await callback(user);
+            const userDetails = user && getUserDetails(user);
+            await callback(userDetails);
         }
     );
     return unsubscribe;

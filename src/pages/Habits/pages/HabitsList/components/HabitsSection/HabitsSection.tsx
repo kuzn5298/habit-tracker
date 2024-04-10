@@ -1,4 +1,5 @@
-import { Habit } from '../../types';
+import { Habit } from '@/types';
+
 import { ActualHabits, CompletedHabits } from './components';
 
 interface HabitsSectionProps {

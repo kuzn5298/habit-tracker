@@ -1,6 +1,4 @@
-import { MapObject } from '@/types';
-
-export const COLORS_MAP: MapObject<string, string> = {
+export const COLORS_MAP = {
     red: 'bg-red-700',
     orange: 'bg-orange-700',
     yellow: 'bg-yellow-700',

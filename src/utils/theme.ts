@@ -26,7 +26,7 @@ export const getTheme = () => {
     return storageTheme ?? DEFAULT_THEME;
 };
 
-export const setThemeColor = () => {
+export const setMetaThemeColor = () => {
     const CSS_VARIABLE_NAME = '--background';
 
     const cssVariable = getComputedStyle(
@@ -68,5 +68,5 @@ export const setTheme = (theme: ThemeEnum) => {
         themeName = getSystemPreferTheme();
     }
     changeTheme(themeName);
-    setThemeColor();
+    setMetaThemeColor();
 };

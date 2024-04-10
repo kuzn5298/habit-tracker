@@ -3,19 +3,16 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@/components';
 import { PageContainer } from '@/components/app';
+import { Button } from '@/components/ui';
 import { AppRouteEnum } from '@/constants';
 import { authService } from '@/services';
-import { useSettingsStore } from '@/store';
 
 import { SettingsButton, SwitchButton } from '../../components';
 
 const Settings: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation('settings');
-    const { animation, notification, toggleAnimation, toggleNotification } =
-        useSettingsStore();
 
     const onLogout = useCallback(() => {
         authService.signOut();
@@ -44,15 +41,8 @@ const Settings: React.FC = () => {
                 >
                     {t('THEME_TEXT')}
                 </SettingsButton>
-                <SwitchButton
-                    checked={notification}
-                    onChange={toggleNotification}
-                >
-                    {t('NOTIFICATION_TEXT')}
-                </SwitchButton>
-                <SwitchButton checked={animation} onChange={toggleAnimation}>
-                    {t('ANIMATION_TEXT')}
-                </SwitchButton>
+                <SwitchButton>{t('NOTIFICATION_TEXT')}</SwitchButton>
+                <SwitchButton>{t('ANIMATION_TEXT')}</SwitchButton>
                 <SettingsButton
                     endIcon={<ChevronRight />}
                     onClick={() => navigate(AppRouteEnum.SETTINGS_LANGUAGE)}

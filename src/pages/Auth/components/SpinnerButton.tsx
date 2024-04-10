@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Button, ButtonProps } from '@/components';
 import { SpinnerIcon } from '@/components/icons';
+import { Button, ButtonProps } from '@/components/ui';
 
 export interface SpinnerButtonProps extends ButtonProps {
     isLoading?: boolean;

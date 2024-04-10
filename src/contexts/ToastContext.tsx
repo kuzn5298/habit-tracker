@@ -2,7 +2,7 @@ import React, { createContext, useMemo } from 'react';
 import { CircleAlert, CircleCheck, CircleX, Info } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { Toaster } from '@/components';
+import { Toaster } from '@/components/ui';
 
 export interface ToastContextValue {
     toast: typeof toast;

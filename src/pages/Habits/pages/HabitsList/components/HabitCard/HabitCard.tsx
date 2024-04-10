@@ -1,14 +1,15 @@
 import { createElement } from 'react';
 
-import { Checkbox } from '@/components';
+import { Checkbox } from '@/components/ui';
 import { COLORS_MAP, ICONS_MAP } from '@/constants';
+import { HabitColorType, HabitIconType } from '@/types';
 import { cn } from '@/utils/ui';
 
 interface HabitCardProps {
     name: string;
     description?: string;
-    color?: string;
-    icon?: string;
+    color?: HabitColorType;
+    icon?: HabitIconType;
     completed?: boolean;
 }
 

@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-import { Button, ButtonProps } from '@/components';
+import { Button, ButtonProps } from '@/components/ui';
 import { cn } from '@/utils';
 
 const buttonVariants = cva(

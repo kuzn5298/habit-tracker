@@ -1,5 +1,18 @@
 import { use } from 'react';
 
 import { AuthContext } from '@/contexts';
+import { UserDetails } from '@/types';
 
-export const useAuth = () => use(AuthContext);
+interface UseAuth {
+    user: UserDetails | null;
+    isAuthenticated: boolean;
+}
+
+export const useAuth = (): UseAuth => {
+    const { isAuthenticated, user } = use(AuthContext);
+
+    return {
+        user,
+        isAuthenticated,
+    };
+};

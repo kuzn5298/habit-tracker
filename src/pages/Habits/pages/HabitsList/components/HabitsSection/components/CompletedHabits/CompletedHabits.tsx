@@ -6,9 +6,9 @@ import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
-} from '@/components';
+} from '@/components/ui';
+import { Habit } from '@/types';
 
-import { Habit } from '../../../../types';
 import { HabitCard } from '../../../HabitCard';
 
 interface CompletedHabitsProps {
@@ -20,10 +20,7 @@ export const CompletedHabits: React.FC<CompletedHabitsProps> = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const completedHabits = useMemo(
-        () => habits.filter((habit) => habit.completed),
-        [habits]
-    );
+    const completedHabits = useMemo(() => habits.filter(() => false), [habits]);
 
     return (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -43,14 +40,14 @@ export const CompletedHabits: React.FC<CompletedHabitsProps> = ({
 
             <CollapsibleContent className="space-y-2">
                 {completedHabits.map(
-                    ({ id, name, description, icon, color, completed }) => (
+                    ({ id, name, description, icon, color }) => (
                         <HabitCard
                             key={id}
                             name={name}
                             description={description}
                             icon={icon}
                             color={color}
-                            completed={completed}
+                            completed
                         />
                     )
                 )}

@@ -5,12 +5,9 @@ import {
     Droplet,
     Footprints,
     GlassWater,
-    LucideIcon,
 } from 'lucide-react';
 
-import { MapObject } from '@/types';
-
-export const ICONS_MAP: MapObject<string, LucideIcon> = {
+export const ICONS_MAP = {
     'book-a': BookA,
     'book-t': BookType,
     steps: Footprints,

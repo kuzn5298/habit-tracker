@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { User as FirebaseUser } from 'firebase/auth';
 
-import { ViewLoading } from '@/components';
+import { ViewLoading } from '@/components/custom';
 import { authService } from '@/services';
+import { UserDetails } from '@/types';
 
 export interface AuthContextValue {
     isAuthenticated: boolean;
-    user: FirebaseUser | null;
+    user: UserDetails | null;
 }
 
 export interface AuthProviderProps {
@@ -19,11 +19,11 @@ export const AuthContext = createContext<AuthContextValue>(
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<FirebaseUser | null>(null);
+    const [user, setUser] = useState<UserDetails | null>(null);
 
     useEffect(() => {
         const authStateCallback = async (
-            userInformation: FirebaseUser | null
+            userInformation: UserDetails | null
         ) => {
             setUser(userInformation);
             setLoading(false);

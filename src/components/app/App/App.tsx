@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { ViewLoading } from '@/components';
+import { ViewLoading } from '@/components/custom';
 import {
     AuthProvider,
     LanguageProvider,

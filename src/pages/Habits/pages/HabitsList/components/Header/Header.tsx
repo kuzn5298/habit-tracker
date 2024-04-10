@@ -1,6 +1,6 @@
 import { cloneElement } from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/ui';
 
 import { Action } from '../../types';
 
