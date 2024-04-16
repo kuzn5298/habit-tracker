@@ -1,6 +1,4 @@
-import { MapObject } from '@/types';
-
-export const FIREBASE_CODES_MAP: MapObject<string, string> = {
+export const FIREBASE_CODES_MAP: Record<string, string> = {
     'auth/operation-not-supported-in-this-environment': 'FIREBASE_HTTP_SUPPORT',
     'auth/popup-blocked': 'FIREBASE_POPUP_BLOCKED',
     'auth/popup-closed-by-user': 'FIREBASE_POPUP_CLOSED',

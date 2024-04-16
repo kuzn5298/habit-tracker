@@ -8,6 +8,7 @@ import MobileDialogWrapper from './MobileDialogWrapper';
 
 const DialogWrapper: React.FC<DialogWrapperProps> = (props) => {
     const { isMobile } = usePageDialog();
+
     return React.createElement(
         isMobile ? MobileDialogWrapper : DesktopDialogWrapper,
         props
@@ -15,11 +16,12 @@ const DialogWrapper: React.FC<DialogWrapperProps> = (props) => {
 };
 
 const DialogWrapperWithContext: React.FC<DialogWrapperWithContextProps> = ({
+    open,
     onClose,
     ...props
 }) => (
-    <DialogProvider onClose={onClose}>
-        <DialogWrapper {...props} />
+    <DialogProvider open={open} onClose={onClose}>
+        <DialogWrapper open={open} {...props} />
     </DialogProvider>
 );
 

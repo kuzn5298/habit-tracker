@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { PageContainer } from '@/components/app';
+import { PageButton } from '@/components/custom';
 import { Button } from '@/components/ui';
 import { AppRouteEnum } from '@/constants';
 import { authService } from '@/services';
 
-import { SettingsButton, SwitchButton } from '../../components';
+import { SwitchButton } from '../../components';
 
-const Settings: React.FC = () => {
+const Page: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation('settings');
 
@@ -35,26 +36,24 @@ const Settings: React.FC = () => {
                 </span>
             </div>
             <div className="flex flex-1 flex-col gap-3">
-                <SettingsButton
+                <PageButton
                     endIcon={<ChevronRight />}
                     onClick={() => navigate(AppRouteEnum.SETTINGS_THEME)}
                 >
                     {t('THEME_TEXT')}
-                </SettingsButton>
+                </PageButton>
                 <SwitchButton>{t('NOTIFICATION_TEXT')}</SwitchButton>
                 <SwitchButton>{t('ANIMATION_TEXT')}</SwitchButton>
-                <SettingsButton
+                <PageButton
                     endIcon={<ChevronRight />}
                     onClick={() => navigate(AppRouteEnum.SETTINGS_LANGUAGE)}
                 >
                     {t('LANGUAGE_TEXT')}
-                </SettingsButton>
-                <SettingsButton onClick={onLogout}>
-                    {t('LOGOUT_TEXT')}
-                </SettingsButton>
+                </PageButton>
+                <PageButton onClick={onLogout}>{t('LOGOUT_TEXT')}</PageButton>
             </div>
         </PageContainer>
     );
 };
 
-export default Settings;
+export default Page;

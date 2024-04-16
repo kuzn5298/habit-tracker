@@ -1,11 +1,9 @@
 import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { PageDialogBody } from '@/components/custom';
+import { PageButton, PageDialogBody } from '@/components/custom';
 import { AVAILABLE_THEMES, THEMES_MAP } from '@/constants';
 import { useTheme } from '@/hooks';
-
-import { SettingsButton } from '../../components';
 
 const ThemeBody: React.FC = () => {
     const { theme, setTheme } = useTheme();
@@ -17,7 +15,7 @@ const ThemeBody: React.FC = () => {
                 {AVAILABLE_THEMES.map((themeItem) => {
                     const selected = theme === themeItem;
                     return (
-                        <SettingsButton
+                        <PageButton
                             key={themeItem}
                             onClick={() => setTheme(themeItem)}
                             endIcon={
@@ -26,7 +24,7 @@ const ThemeBody: React.FC = () => {
                             size="sm"
                         >
                             {t(THEMES_MAP[themeItem])}
-                        </SettingsButton>
+                        </PageButton>
                     );
                 })}
             </div>

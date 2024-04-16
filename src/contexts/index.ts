@@ -1,4 +1,4 @@
 export * from './ThemeContext';
-export * from './LanguageContext';
+export * from './LocaleContext';
 export * from './AuthContext';
 export * from './ToastContext';

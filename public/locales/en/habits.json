@@ -1,0 +1,10 @@
+{
+    "ADD_HABIT": "Add habit",
+    "HABIT_NAME": "Name",
+    "HABIT_DESCRIPTION": "Description",
+    "HABIT_REPEAT": "Repeat",
+    "HABIT_REPEAT_DAYS": "Days",
+    "HABIT_REPEAT_MONTHS": "Months",
+    "HABIT_ICON": "Icon",
+    "HABIT_START_DATE": "Start Date"
+}

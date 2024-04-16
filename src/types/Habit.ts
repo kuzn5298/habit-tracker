@@ -9,16 +9,16 @@ type HabitDetails = {
     description?: string;
     color?: HabitColorType;
     icon?: HabitIconType;
-    startDate?: number;
+    startDate: string;
 };
 
 export enum HabitRepeatTypeEnum {
-    WEEKLY = 'WEEKLY',
+    DAILY = 'DAILY',
     MONTHLY = 'MONTHLY',
 }
 
-type WeeklyRepeat = {
-    repeatType: HabitRepeatTypeEnum.WEEKLY;
+type DailyRepeat = {
+    repeatType: HabitRepeatTypeEnum.DAILY;
     repeatList: WeekDayEnum[];
 };
 
@@ -27,7 +27,7 @@ type MonthlyRepeat = {
     repeatList: number[];
 };
 
-type RepeatPayload = WeeklyRepeat | MonthlyRepeat;
+type RepeatPayload = DailyRepeat | MonthlyRepeat;
 
 export type Habit = HabitDetails & RepeatPayload;
 

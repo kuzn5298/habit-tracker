@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { ViewLoading } from '@/components/custom';
 import {
     AuthProvider,
-    LanguageProvider,
+    LocaleProvider,
     ThemeProvider,
     ToastProvider,
 } from '@/contexts';
@@ -16,11 +16,11 @@ const App: React.FC = () => {
         <ThemeProvider>
             <ToastProvider>
                 <Suspense fallback={<ViewLoading />}>
-                    <LanguageProvider>
+                    <LocaleProvider>
                         <AuthProvider>
                             <Router routes={APPLICATION_ROUTER} />
                         </AuthProvider>
-                    </LanguageProvider>
+                    </LocaleProvider>
                 </Suspense>
             </ToastProvider>
         </ThemeProvider>

@@ -15,7 +15,7 @@ const MobileDialog: React.FC<DialogFooterProps> = ({
             {children}
             {closeButton && (
                 <DrawerClose asChild>
-                    <Button variant="outline">{t('CLOSE')}</Button>
+                    <Button variant="secondary">{t('CLOSE')}</Button>
                 </DrawerClose>
             )}
         </DrawerFooter>

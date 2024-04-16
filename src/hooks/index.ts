@@ -1,5 +1,5 @@
 export * from './useTheme';
-export * from './useLanguage';
+export * from './useLocale';
 export * from './useSuspense';
 export * from './useToast';
 export * from './useMedia';

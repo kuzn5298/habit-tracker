@@ -1,9 +1,9 @@
 export const COLORS_MAP = {
-    red: 'bg-red-700',
-    orange: 'bg-orange-700',
-    yellow: 'bg-yellow-700',
-    green: 'bg-green-700',
-    blue: 'bg-blue-700',
-    purple: 'bg-purple-700',
-    pink: 'bg-pink-700',
+    red: '#b91c1c',
+    orange: '#c2410c',
+    yellow: '#a16207',
+    green: '#15803d',
+    blue: '#1d4ed8',
+    purple: '#7e22ce',
+    pink: '#be185d',
 };

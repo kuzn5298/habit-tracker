@@ -1,14 +1,12 @@
 import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { PageDialogBody } from '@/components/custom';
+import { PageButton, PageDialogBody } from '@/components/custom';
 import { AVAILABLE_LANGUAGES, LANGUAGES_MAP } from '@/constants';
-import { useLanguage } from '@/hooks';
-
-import { SettingsButton } from '../../components';
+import { useLocale } from '@/hooks';
 
 const LanguageBody: React.FC = () => {
-    const { language, changeLanguage } = useLanguage();
+    const { language, changeLanguage } = useLocale();
     const { t } = useTranslation(['common', 'settings']);
 
     return (
@@ -17,7 +15,7 @@ const LanguageBody: React.FC = () => {
                 {AVAILABLE_LANGUAGES.map((languageItem) => {
                     const selected = language === languageItem;
                     return (
-                        <SettingsButton
+                        <PageButton
                             key={languageItem}
                             onClick={() => changeLanguage(languageItem)}
                             endIcon={
@@ -26,7 +24,7 @@ const LanguageBody: React.FC = () => {
                             size="sm"
                         >
                             {t(LANGUAGES_MAP[languageItem])}
-                        </SettingsButton>
+                        </PageButton>
                     );
                 })}
             </div>
