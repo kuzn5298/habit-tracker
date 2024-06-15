@@ -104,10 +104,11 @@ const FormLabel = React.forwardRef<
 });
 FormLabel.displayName = 'FormLabel';
 
-const FormControl = React.forwardRef<
-    React.ElementRef<typeof Slot>,
-    React.ComponentPropsWithoutRef<typeof Slot>
->(({ ...props }, ref) => {
+interface FormControlProps extends React.ComponentPropsWithoutRef<typeof Slot> {
+    ref?: React.RefObject<React.ElementRef<typeof Slot>>;
+}
+
+const FormControl: React.FC<FormControlProps> = ({ ref, ...props }) => {
     const { error, formItemId, formDescriptionId, formMessageId } =
         useFormField();
 
@@ -124,7 +125,7 @@ const FormControl = React.forwardRef<
             {...props}
         />
     );
-});
+};
 FormControl.displayName = 'FormControl';
 
 const FormDescription = React.forwardRef<
@@ -175,12 +176,12 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, FormMessageProps>(
 FormMessage.displayName = 'FormMessage';
 
 export {
-    useFormField,
     Form,
-    FormItem,
-    FormLabel,
     FormControl,
     FormDescription,
-    FormMessage,
     FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+    useFormField,
 };

@@ -4,10 +4,12 @@ import { Check } from 'lucide-react';
 
 import { cn } from '@/utils/ui';
 
-const Checkbox = React.forwardRef<
-    React.ElementRef<typeof CheckboxPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
+interface CheckboxProps
+    extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+    ref?: React.RefObject<React.ElementRef<typeof CheckboxPrimitive.Root>>;
+}
+
+const Checkbox: React.FC<CheckboxProps> = ({ className, ref, ...props }) => (
     <CheckboxPrimitive.Root
         ref={ref}
         className={cn(
@@ -22,7 +24,7 @@ const Checkbox = React.forwardRef<
             <Check className="size-4" />
         </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-));
+);
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
