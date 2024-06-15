@@ -14,7 +14,7 @@ const DialogClose = DialogPrimitive.Close;
 
 interface DialogOverlayProps
     extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> {
-    ref?: React.RefObject<React.ElementRef<typeof DialogPrimitive.Overlay>>;
+    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Overlay>>;
 }
 
 const DialogOverlay: React.FC<DialogOverlayProps> = ({
@@ -35,7 +35,7 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 interface DialogContentProps
     extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
-    ref?: React.RefObject<React.ElementRef<typeof DialogPrimitive.Content>>;
+    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Content>>;
 }
 
 const DialogContent: React.FC<DialogContentProps> = ({
@@ -94,7 +94,7 @@ DialogFooter.displayName = 'DialogFooter';
 
 interface DialogTitleProps
     extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {
-    ref?: React.RefObject<React.ElementRef<typeof DialogPrimitive.Title>>;
+    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Title>>;
 }
 
 const DialogTitle: React.FC<DialogTitleProps> = ({
@@ -115,7 +115,7 @@ DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 interface DialogDescriptionProps
     extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> {
-    ref?: React.RefObject<React.ElementRef<typeof DialogPrimitive.Description>>;
+    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Description>>;
 }
 
 const DialogDescription: React.FC<DialogDescriptionProps> = ({

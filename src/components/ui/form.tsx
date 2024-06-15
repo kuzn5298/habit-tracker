@@ -105,7 +105,7 @@ const FormLabel = React.forwardRef<
 FormLabel.displayName = 'FormLabel';
 
 interface FormControlProps extends React.ComponentPropsWithoutRef<typeof Slot> {
-    ref?: React.RefObject<React.ElementRef<typeof Slot>>;
+    ref?: React.Ref<React.ElementRef<typeof Slot>>;
 }
 
 const FormControl: React.FC<FormControlProps> = ({ ref, ...props }) => {

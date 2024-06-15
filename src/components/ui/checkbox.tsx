@@ -6,7 +6,7 @@ import { cn } from '@/utils/ui';
 
 interface CheckboxProps
     extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
-    ref?: React.RefObject<React.ElementRef<typeof CheckboxPrimitive.Root>>;
+    ref?: React.Ref<React.ElementRef<typeof CheckboxPrimitive.Root>>;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ className, ref, ...props }) => (
