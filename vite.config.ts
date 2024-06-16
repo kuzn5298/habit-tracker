@@ -8,6 +8,7 @@ const root = resolve(__dirname, './src');
 const manifest = {
     name: 'Habit Tracker',
     short_name: 'Habit Tracker',
+    theme_color: '#212330',
     background_color: '#212330',
     icons: [
         {
@@ -47,6 +48,10 @@ export default defineConfig({
                 'mask-icon.svg',
             ],
             manifest,
+            pwaAssets: {
+                config: true,
+                overrideManifestIcons: true,
+            },
         }),
     ],
     resolve: {
