@@ -1,9 +1,6 @@
 import { createContext, useMemo } from 'react';
 
-import { useBreakpoint } from '@/hooks';
-
 export interface DialogContextValue {
-    isMobile: boolean;
     open: boolean;
     onClose: () => void;
 }
@@ -23,12 +20,7 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
     open,
     onClose,
 }) => {
-    const isMobile = useBreakpoint('sm');
-
-    const contextValue = useMemo(
-        () => ({ isMobile, open, onClose }),
-        [isMobile, open, onClose]
-    );
+    const contextValue = useMemo(() => ({ open, onClose }), [open, onClose]);
 
     return (
         <DialogContext.Provider value={contextValue}>

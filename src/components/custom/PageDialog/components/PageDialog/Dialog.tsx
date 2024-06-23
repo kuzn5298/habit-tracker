@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { usePageDialog } from '../../hooks';
+import { DialogContent } from '@/components/ui';
+import { cn } from '@/utils';
+
 import { DialogProps } from '../../types';
-import DesktopDialog from './DesktopDialog';
-import MobileDialog from './MobileDialog';
 
-const Dialog: React.FC<DialogProps> = (props) => {
-    const { isMobile } = usePageDialog();
-    return React.createElement(isMobile ? MobileDialog : DesktopDialog, props);
+const Dialog: React.FC<DialogProps> = ({ header, body, footer, className }) => {
+    const onInteractOutside = useCallback((e: Event) => {
+        e.preventDefault();
+    }, []);
+
+    return (
+        <DialogContent
+            onInteractOutside={onInteractOutside}
+            className={cn('max-h-[90%]', className)}
+        >
+            {header}
+            {body}
+            {footer}
+        </DialogContent>
+    );
 };
 
 export default Dialog;

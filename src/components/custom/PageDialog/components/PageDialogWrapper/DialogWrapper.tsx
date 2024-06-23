@@ -1,17 +1,24 @@
 import React from 'react';
 
+import { Dialog } from '@/components/ui';
+
 import { DialogProvider } from '../../contexts';
 import { usePageDialog } from '../../hooks';
 import { DialogWrapperProps, DialogWrapperWithContextProps } from '../../types';
-import DesktopDialogWrapper from './DesktopDialogWrapper';
-import MobileDialogWrapper from './MobileDialogWrapper';
 
-const DialogWrapper: React.FC<DialogWrapperProps> = (props) => {
-    const { isMobile } = usePageDialog();
+const DialogWrapper: React.FC<DialogWrapperProps> = ({ open, children }) => {
+    const { onClose } = usePageDialog();
 
-    return React.createElement(
-        isMobile ? MobileDialogWrapper : DesktopDialogWrapper,
-        props
+    const handleOpenChange = (o: boolean) => {
+        if (!o) {
+            onClose();
+        }
+    };
+
+    return (
+        <Dialog open={open} onOpenChange={handleOpenChange}>
+            {children}
+        </Dialog>
     );
 };
 

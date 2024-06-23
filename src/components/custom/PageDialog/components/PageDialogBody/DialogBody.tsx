@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { usePageDialog } from '../../hooks';
 import { DialogBodyProps } from '../../types';
-import DesktopDialog from './DesktopDialogBody';
-import MobileDialog from './MobileDialogBody';
 
-const DialogBody: React.FC<DialogBodyProps> = (props) => {
-    const { isMobile } = usePageDialog();
-    return React.createElement(isMobile ? MobileDialog : DesktopDialog, props);
+const DialogBody: React.FC<DialogBodyProps> = ({ children }) => {
+    return <div className="h-full overflow-hidden">{children}</div>;
 };
 
 export default DialogBody;

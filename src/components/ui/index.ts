@@ -8,7 +8,6 @@ export * from './dialog';
 export * from './sonner';
 export * from './collapsible';
 export * from './switch';
-export * from './drawer';
 export * from './textarea';
 export * from './calendar';
 export * from './tabs';

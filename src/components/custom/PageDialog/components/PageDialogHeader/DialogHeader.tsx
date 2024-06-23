@@ -1,15 +1,24 @@
 import React from 'react';
 
-import { usePageDialog } from '../../hooks';
-import { DialogHeaderProps } from '../../types';
-import DesktopDialogHeader from './DesktopDialogHeader';
-import MobileDialogHeader from './MobileDialogHeader';
+import {
+    DialogDescription,
+    DialogTitle,
+    DialogHeader as UIDialogHeader,
+} from '@/components/ui';
+import { cn } from '@/utils';
 
-const DialogHeader: React.FC<DialogHeaderProps> = (props) => {
-    const { isMobile } = usePageDialog();
-    return React.createElement(
-        isMobile ? MobileDialogHeader : DesktopDialogHeader,
-        props
+import { DialogHeaderProps } from '../../types';
+
+const DialogHeader: React.FC<DialogHeaderProps> = ({ title, description }) => {
+    return (
+        <UIDialogHeader>
+            <DialogTitle className={cn('text-2xl', !title && 'hidden')}>
+                {title}
+            </DialogTitle>
+            <DialogDescription className={cn(!description && 'hidden')}>
+                {description}
+            </DialogDescription>
+        </UIDialogHeader>
     );
 };
 
