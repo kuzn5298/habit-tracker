@@ -12,12 +12,12 @@ import { DialogHeaderProps } from '../../types';
 const DialogHeader: React.FC<DialogHeaderProps> = ({ title, description }) => {
     return (
         <UIDialogHeader>
-            <DialogTitle className={cn('text-2xl', !title && 'hidden')}>
-                {title}
-            </DialogTitle>
-            <DialogDescription className={cn(!description && 'hidden')}>
-                {description}
-            </DialogDescription>
+            {title && (
+                <DialogTitle className={cn('text-2xl')}>{title}</DialogTitle>
+            )}
+            {description && (
+                <DialogDescription>{description}</DialogDescription>
+            )}
         </UIDialogHeader>
     );
 };

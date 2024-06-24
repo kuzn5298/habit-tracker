@@ -1,7 +1,7 @@
 import React, { Suspense, useCallback } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { PageDialogWrapper } from '@/components/custom';
+import { PageDialogWrapper, ViewLoading } from '@/components/custom';
 import { AppRouteEnum } from '@/constants';
 
 export interface PageWrapperProps {
@@ -23,9 +23,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ element, path }) => {
             <PageDialogWrapper open={!pagePath} onClose={closeDialog}>
                 <Outlet />
             </PageDialogWrapper>
-            <Suspense fallback={<div>element loading...</div>}>
-                {element}
-            </Suspense>
+            <Suspense fallback={<ViewLoading />}>{element}</Suspense>
         </>
     );
 };
