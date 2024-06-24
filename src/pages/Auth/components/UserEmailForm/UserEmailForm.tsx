@@ -2,15 +2,8 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    Input,
-} from '@/components/ui';
+import { InputControlled } from '@/components/controls';
+import { Form } from '@/components/ui';
 
 import { SpinnerButton } from '../SpinnerButton';
 import { EmailFormValues } from './type';
@@ -44,41 +37,19 @@ export const UserEmailForm = ({
         [action, form]
     );
 
-    const tMessage = useCallback(
-        (key: string) => t(key, { ns: 'inputs' }),
-        [t]
-    );
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} noValidate {...props}>
                 <div className="grid gap-4">
-                    <FormField
+                    <InputControlled
                         control={form.control}
                         name="email"
-                        render={({ field }) => {
-                            return (
-                                <FormItem className="-mt-2">
-                                    <FormLabel className="sr-only">
-                                        {t('inputs:EMAIL_LABEL')}
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder={t(
-                                                'inputs:EMAIL_PLACEHOLDER'
-                                            )}
-                                            type="email"
-                                            autoCapitalize="none"
-                                            autoComplete="email"
-                                            autoCorrect="off"
-                                            disabled={isLoading}
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage t={tMessage} />
-                                </FormItem>
-                            );
-                        }}
+                        placeholder={t('inputs:EMAIL_PLACEHOLDER')}
+                        type="email"
+                        autoCapitalize="none"
+                        autoComplete="email"
+                        autoCorrect="off"
+                        disabled={isLoading}
                     />
                     <SpinnerButton isLoading={isLoading} disabled={isInvalid}>
                         {t('SIGN_IN_WITH_EMAIL')}

@@ -22,6 +22,7 @@ interface PageButtonProps extends ButtonProps {
     size?: 'sm' | 'default';
     endIcon?: React.ReactElement;
     description?: string;
+    invalid?: boolean;
 }
 
 const PageButton: React.FC<PageButtonProps> = ({
@@ -30,12 +31,16 @@ const PageButton: React.FC<PageButtonProps> = ({
     endIcon,
     size,
     description,
+    invalid,
     ...props
 }) => {
     return (
         <Button
             variant="outline"
-            className={cn(buttonVariants({ size, className }))}
+            className={cn(
+                buttonVariants({ size, className }),
+                invalid && 'border-destructive'
+            )}
             {...props}
         >
             <span className="flex flex-1 flex-col items-start overflow-hidden ">

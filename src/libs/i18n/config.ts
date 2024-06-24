@@ -16,7 +16,7 @@ i18n.use(Backend)
         backend: {
             loadPath: '/locales/{{lng}}/{{ns}}.json',
         },
-        ns: ['common', 'error', 'auth'],
+        ns: ['common', 'error', 'auth', 'inputs'],
         defaultNS: 'common',
         detection: {
             caches: ['localStorage'],

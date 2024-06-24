@@ -155,16 +155,15 @@ const FormDescription: React.FC<FormDescriptionProps> = ({
 FormDescription.displayName = 'FormDescription';
 
 interface FormMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    t?: (key: string) => string;
     ref?: React.Ref<HTMLParagraphElement>;
 }
 
 const FormMessage: React.FC<FormMessageProps> = (
-    { className, children, t = (key) => key, ...props },
+    { className, children, ...props },
     ref
 ) => {
     const { error, formMessageId } = useFormField();
-    const body = error ? t(String(error?.message)) : children;
+    const body = error?.message ?? children;
 
     if (!body) {
         return null;
@@ -192,5 +191,4 @@ export {
     FormItem,
     FormLabel,
     FormMessage,
-    useFormField,
 };

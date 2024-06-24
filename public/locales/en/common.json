@@ -9,5 +9,7 @@
 
     "SYSTEM_THEME": "System",
     "LIGHT_THEME": "Light",
-    "DARK_THEME": "Dark"
+    "DARK_THEME": "Dark",
+
+    "VALIDATION_ERROR": "Validation error"
 }

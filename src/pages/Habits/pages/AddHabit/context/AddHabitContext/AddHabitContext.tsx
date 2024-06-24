@@ -1,16 +1,17 @@
-import { createContext, useCallback, useEffect, useMemo } from 'react';
+import { createContext, useCallback, useEffect } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 
-import { AppRouteEnum } from '@/constants';
-import { Habit } from '@/types';
+import { HabitWithoutId } from '@/types';
 
 import { AddHabitScreenEnum } from '../../constants';
+import { INIT_FORM_VALUES } from './AddHabit.constants';
+import { addHabitResolver } from './AddHabit.resolver';
 import { useAddHabitStore } from './useAddHabitStore';
 
 export interface AddHabitContextValue {
     screen: AddHabitScreenEnum;
     setScreen: (screen: AddHabitScreenEnum) => void;
-    form: UseFormReturn<Habit>;
+    form: UseFormReturn<HabitWithoutId>;
     onSave: () => void;
 }
 
@@ -25,43 +26,39 @@ export const AddHabitContext = createContext<AddHabitContextValue>(
 export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
     children,
 }) => {
-    const { formValues, setFormValues, screen, setScreen, resetState } =
-        useAddHabitStore();
-
-    const form = useForm<Habit>({
-        defaultValues: formValues,
-    });
+    const { screen, setScreen, resetState } = useAddHabitStore();
 
     useEffect(
         () => () => {
-            const isAddHabitPage =
-                window.location.pathname === AppRouteEnum.ADD_HABIT;
-            if (isAddHabitPage) {
-                const v = form.getValues();
-                setFormValues(v);
-            } else {
-                resetState();
-            }
+            resetState();
         },
-        [form, setFormValues, resetState]
+        [resetState]
     );
 
+    const form = useForm<HabitWithoutId>({
+        defaultValues: INIT_FORM_VALUES,
+        resolver: addHabitResolver,
+    });
+
     const onSave = useCallback(
-        () => form.handleSubmit((e) => console.log(e))(),
+        () =>
+            form.handleSubmit(
+                (e) => console.log(e),
+                (err) => console.log(err)
+            )(),
         [form]
     );
 
-    const contextValue = useMemo(
-        () => ({
-            screen,
-            setScreen,
-            form,
-            onSave,
-        }),
-        [screen, setScreen, form, onSave]
-    );
     return (
-        <AddHabitContext.Provider value={contextValue}>
+        <AddHabitContext.Provider
+            // eslint-disable-next-line react/jsx-no-constructed-context-values
+            value={{
+                screen,
+                setScreen,
+                form,
+                onSave,
+            }}
+        >
             {children}
         </AddHabitContext.Provider>
     );
