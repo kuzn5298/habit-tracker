@@ -11,6 +11,7 @@ export interface DialogProps {
     header?: React.ReactElement;
     body?: React.ReactElement;
     footer?: React.ReactElement;
+    loading?: boolean;
     className?: string;
 }
 

@@ -6,7 +6,13 @@ import { cn } from '@/utils';
 
 import { DialogProps } from '../../types';
 
-const Dialog: React.FC<DialogProps> = ({ header, body, footer, className }) => {
+const Dialog: React.FC<DialogProps> = ({
+    header,
+    body,
+    footer,
+    loading,
+    className,
+}) => {
     const onInteractOutside = useCallback((e: Event) => {
         e.preventDefault();
     }, []);
@@ -23,6 +29,7 @@ const Dialog: React.FC<DialogProps> = ({ header, body, footer, className }) => {
                 {body}
                 {footer}
             </Suspense>
+            {loading && <ViewLoading className="absolute inset-0" />}
         </DialogContent>
     );
 };

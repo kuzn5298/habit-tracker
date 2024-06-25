@@ -6,4 +6,6 @@ export const FIREBASE_CODES_MAP: Record<string, string> = {
     'auth/invalid-email': 'FIREBASE_INVALID_EMAIL',
     'auth/user-disabled': 'FIREBASE_USER_DISABLED',
     'auth/user-not-found': 'FIREBASE_USER_NOT_FOUND',
+
+    'permission-denied': 'FIREBASE_PERMISSION_DENIED',
 };

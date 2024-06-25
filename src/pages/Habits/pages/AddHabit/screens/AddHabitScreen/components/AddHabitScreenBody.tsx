@@ -34,10 +34,10 @@ export const AddHabitScreenBody: React.FC = () => {
 
     const repeatListText = useMemo(() => {
         if (repeatList.length === WEEK_DAYS.length) {
-            return 'Every day';
+            return t('habits:HABIT_REPEAT_ALL_DAYS');
         }
         return repeatList.map((day) => getDayMinText(day)).join(', ');
-    }, [repeatList]);
+    }, [repeatList, t]);
 
     return (
         <PageDialogBody>

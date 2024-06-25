@@ -6,5 +6,8 @@
     "HABIT_REPEAT_DAYS": "Days",
     "HABIT_REPEAT_MONTHS": "Months",
     "HABIT_ICON": "Icon",
-    "HABIT_START_DATE": "Start Date"
+    "HABIT_START_DATE": "Start Date",
+
+    "HABIT_SAVED_SUCCESS": "Habit added successfully",
+    "HABIT_REPEAT_ALL_DAYS": "Every day"
 }

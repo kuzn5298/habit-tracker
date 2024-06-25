@@ -1,6 +1,3 @@
-import { Suspense } from 'react';
-
-import { ViewLoading } from '@/components/custom';
 import {
     AuthProvider,
     LocaleProvider,
@@ -15,13 +12,11 @@ const App: React.FC = () => {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <Suspense fallback={<ViewLoading />}>
-                    <LocaleProvider>
-                        <AuthProvider>
-                            <Router routes={APPLICATION_ROUTER} />
-                        </AuthProvider>
-                    </LocaleProvider>
-                </Suspense>
+                <LocaleProvider>
+                    <AuthProvider>
+                        <Router routes={APPLICATION_ROUTER} />
+                    </AuthProvider>
+                </LocaleProvider>
             </ToastProvider>
         </ThemeProvider>
     );
