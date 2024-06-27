@@ -3,10 +3,7 @@ import { useForm, UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { usePageDialog } from '@/components/custom';
-import { FIREBASE_CODES_MAP } from '@/constants';
-import { useToast } from '@/hooks';
-import { getFirebaseTranslationMessage } from '@/libs/firebase';
-import { habitService } from '@/services';
+import { useHabitAPI, useToast } from '@/hooks';
 import { useHabitStore } from '@/store';
 import { HabitWithoutId } from '@/types';
 
@@ -18,7 +15,7 @@ export interface AddHabitContextValue {
     screen: AddHabitScreenEnum;
     setScreen: (screen: AddHabitScreenEnum) => void;
     form: UseFormReturn<HabitWithoutId>;
-    loading: boolean;
+    isLoading: boolean;
     onSave: () => void;
 }
 
@@ -33,12 +30,12 @@ export const AddHabitContext = createContext<AddHabitContextValue>(
 export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
     children,
 }) => {
-    const [loading, setLoading] = useState(false);
     const [screen, setScreen] = useState(AddHabitScreenEnum.AddScreen);
     const { onClose } = usePageDialog();
-    const { t } = useTranslation(['errors', 'habits']);
+    const { t } = useTranslation('habits');
     const { toast } = useToast();
     const { addHabit } = useHabitStore();
+    const { isLoading, createHabit } = useHabitAPI();
 
     const form = useForm<HabitWithoutId>({
         defaultValues: INIT_FORM_VALUES,
@@ -46,25 +43,15 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
     });
 
     const onFormValid = useCallback(
-        async (data: HabitWithoutId) => {
-            try {
-                setLoading(true);
-                const habit = await habitService.addHabit(data);
-                addHabit(habit);
-                toast.success(t('habits:HABIT_SAVED_SUCCESS'));
+        async (habit: HabitWithoutId) => {
+            const { success, data } = await createHabit(habit);
+            if (success) {
+                addHabit(data);
+                toast.success(t('HABIT_SAVED_SUCCESS'));
                 onClose();
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-            } finally {
-                setLoading?.(false);
             }
         },
-        [addHabit, toast, t, onClose]
+        [createHabit, addHabit, toast, t, onClose]
     );
 
     const onSave = useCallback(async () => {
@@ -78,7 +65,7 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
                 screen,
                 setScreen,
                 form,
-                loading,
+                isLoading,
                 onSave,
             }}
         >

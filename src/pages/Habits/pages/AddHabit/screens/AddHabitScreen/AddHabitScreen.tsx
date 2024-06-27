@@ -8,10 +8,11 @@ import {
 } from './components';
 
 const EditHabitScreen: React.FC = () => {
-    const { loading } = useAddHabit();
+    const { isLoading } = useAddHabit();
+
     return (
         <PageDialog
-            loading={loading}
+            loading={isLoading}
             header={<AddHabitScreenHeader />}
             body={<AddHabitScreenBody />}
             footer={<AddHabitScreenFooter />}

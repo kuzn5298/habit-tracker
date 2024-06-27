@@ -1,7 +1,13 @@
+import { ViewLoading } from '@/components/custom';
+
 import { useVerification } from './hook';
 
 const Verification: React.FC = () => {
-    useVerification();
+    const { isLoading } = useVerification();
+
+    if (isLoading) {
+        return <ViewLoading />;
+    }
 
     return null;
 };

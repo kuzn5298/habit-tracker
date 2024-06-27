@@ -1,15 +1,8 @@
 import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import {
-    FIREBASE_CODES_MAP,
-    ProviderEnum,
-    SIGN_IN_EMAIL_LOCAL_STORAGE,
-} from '@/constants';
-import { useToast } from '@/hooks';
-import { getFirebaseTranslationMessage } from '@/libs/firebase';
+import { ProviderEnum, SIGN_IN_EMAIL_LOCAL_STORAGE } from '@/constants';
+import { useAuthAPI } from '@/hooks/apis';
 import storage from '@/libs/storage';
-import { authService } from '@/services';
 
 type UseLoginReturn = {
     isLoading: boolean;
@@ -20,10 +13,12 @@ type UseLoginReturn = {
 };
 
 export const useLogin = (): UseLoginReturn => {
-    const [isLoading, setIsLoading] = useState(false);
+    const {
+        isLoading,
+        sendSignInLinkToEmail: sendSignInLinkToEmailAPI,
+        signInWithProvider: signInWithProviderAPI,
+    } = useAuthAPI();
     const [isInboxDialog, setInboxDialog] = useState(false);
-    const { toast } = useToast();
-    const { t } = useTranslation('errors');
 
     const closeInboxDialog = useCallback(() => {
         setInboxDialog(false);
@@ -31,39 +26,20 @@ export const useLogin = (): UseLoginReturn => {
 
     const signInWithProvider = useCallback(
         async (provider: ProviderEnum): Promise<void> => {
-            try {
-                await authService.signInWithProvider(provider);
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-            }
+            await signInWithProviderAPI(provider);
         },
-        [t, toast]
+        [signInWithProviderAPI]
     );
 
     const sendSignInLinkToEmail = useCallback(
         async (email: string): Promise<void> => {
-            try {
-                setIsLoading(true);
-                await authService.sendSignInLinkToEmail(email);
+            const { success } = await sendSignInLinkToEmailAPI(email);
+            if (success) {
                 storage.set(SIGN_IN_EMAIL_LOCAL_STORAGE, email);
                 setInboxDialog(true);
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-            } finally {
-                setIsLoading(false);
             }
         },
-        [t, toast]
+        [sendSignInLinkToEmailAPI]
     );
 
     return {

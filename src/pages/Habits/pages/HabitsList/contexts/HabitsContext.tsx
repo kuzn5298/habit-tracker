@@ -1,22 +1,12 @@
-import {
-    createContext,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
-import { useTranslation } from 'react-i18next';
+import { createContext, useCallback, useEffect, useMemo } from 'react';
 
-import { FIREBASE_CODES_MAP } from '@/constants';
-import { useToast } from '@/hooks';
-import { getFirebaseTranslationMessage } from '@/libs/firebase';
-import { habitService } from '@/services';
+import { useHabitAPI } from '@/hooks';
 import { useHabitStore } from '@/store';
 import { Habit } from '@/types';
 
 export interface HabitsContextValue {
     habits: Habit[];
-    loading: boolean;
+    isLoading: boolean;
 }
 
 export interface HabitsProviderProps {
@@ -28,27 +18,15 @@ export const HabitsContext = createContext<HabitsContextValue>(
 );
 
 export const HabitsProvider: React.FC<HabitsProviderProps> = ({ children }) => {
-    const [loading, setLoading] = useState(false);
     const { habits, loaded, setHabits } = useHabitStore();
-    const { t } = useTranslation(['errors', 'habits']);
-    const { toast } = useToast();
+    const { isLoading, getHabits } = useHabitAPI();
 
     const fetchHabits = useCallback(async () => {
-        try {
-            setLoading(true);
-            const fetchedHabits = await habitService.getHabits();
-            setHabits(fetchedHabits);
-        } catch (e) {
-            const message = getFirebaseTranslationMessage(
-                e,
-                FIREBASE_CODES_MAP,
-                t
-            );
-            toast.error(message);
-        } finally {
-            setLoading?.(false);
+        const { success, data } = await getHabits();
+        if (success) {
+            setHabits(data);
         }
-    }, [setHabits, t, toast]);
+    }, [setHabits, getHabits]);
 
     useEffect(() => {
         if (!loaded) {
@@ -57,8 +35,8 @@ export const HabitsProvider: React.FC<HabitsProviderProps> = ({ children }) => {
     }, [fetchHabits, loaded]);
 
     const contextValue = useMemo<HabitsContextValue>(
-        () => ({ habits, loading }),
-        [habits, loading]
+        () => ({ habits, isLoading }),
+        [habits, isLoading]
     );
 
     return (

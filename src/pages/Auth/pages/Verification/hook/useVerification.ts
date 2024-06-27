@@ -1,22 +1,18 @@
 import { useCallback, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import {
-    AppRouteEnum,
-    FIREBASE_CODES_MAP,
-    SIGN_IN_EMAIL_LOCAL_STORAGE,
-} from '@/constants';
-import { useSuspense, useToast } from '@/hooks';
-import { getFirebaseTranslationMessage } from '@/libs/firebase';
+import { AppRouteEnum, SIGN_IN_EMAIL_LOCAL_STORAGE } from '@/constants';
+import { useAuthAPI } from '@/hooks/apis';
 import storage from '@/libs/storage';
 import { authService } from '@/services';
 
-export const useVerification = () => {
+type UseVerificationReturn = {
+    isLoading: boolean;
+};
+
+export const useVerification = (): UseVerificationReturn => {
     const navigate = useNavigate();
-    const wrapSuspense = useSuspense();
-    const { toast } = useToast();
-    const { t } = useTranslation('errors');
+    const { isLoading, signInByEmail: signInByEmailAPI } = useAuthAPI();
 
     const goToLogin = useCallback(
         () => navigate(AppRouteEnum.LOGIN),
@@ -25,19 +21,12 @@ export const useVerification = () => {
 
     const signInByEmail = useCallback(
         async (email: string): Promise<void> => {
-            try {
-                await wrapSuspense(authService.signInByEmailLink(email));
+            const { success } = await signInByEmailAPI(email);
+            if (success) {
                 storage.remove(SIGN_IN_EMAIL_LOCAL_STORAGE);
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
             }
         },
-        [t, toast, wrapSuspense]
+        [signInByEmailAPI]
     );
 
     useEffect(() => {
@@ -66,4 +55,6 @@ export const useVerification = () => {
 
         login();
     }, [goToLogin, signInByEmail]);
+
+    return { isLoading };
 };
