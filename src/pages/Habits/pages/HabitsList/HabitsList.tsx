@@ -6,10 +6,13 @@ import { PageContainer } from '@/components/app';
 import { AppRouteEnum } from '@/constants';
 
 import { DatePickerSection, HabitsSection, Header } from './components';
+import { HabitsProvider } from './contexts';
+import { useHabits } from './hooks';
 import { Action } from './types';
 
 const HabitsList: React.FC = () => {
     const navigate = useNavigate();
+    const { habits } = useHabits();
 
     const actions: Action[] = useMemo(
         () => [
@@ -31,9 +34,15 @@ const HabitsList: React.FC = () => {
         <PageContainer>
             <Header actions={actions} />
             <DatePickerSection className="sm:hidden" />
-            <HabitsSection />
+            <HabitsSection habits={habits} />
         </PageContainer>
     );
 };
 
-export default HabitsList;
+const HabitsListWithContext: React.FC = (props) => (
+    <HabitsProvider>
+        <HabitsList {...props} />
+    </HabitsProvider>
+);
+
+export default HabitsListWithContext;

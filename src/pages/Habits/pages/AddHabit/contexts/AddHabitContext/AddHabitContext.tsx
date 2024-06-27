@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -7,12 +7,12 @@ import { FIREBASE_CODES_MAP } from '@/constants';
 import { useToast } from '@/hooks';
 import { getFirebaseTranslationMessage } from '@/libs/firebase';
 import { habitService } from '@/services';
+import { useHabitStore } from '@/store';
 import { HabitWithoutId } from '@/types';
 
 import { AddHabitScreenEnum } from '../../constants';
 import { INIT_FORM_VALUES } from './AddHabit.constants';
 import { addHabitResolver } from './AddHabit.resolver';
-import { useAddHabitStore } from './useAddHabitStore';
 
 export interface AddHabitContextValue {
     screen: AddHabitScreenEnum;
@@ -34,17 +34,11 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
     children,
 }) => {
     const [loading, setLoading] = useState(false);
+    const [screen, setScreen] = useState(AddHabitScreenEnum.AddScreen);
     const { onClose } = usePageDialog();
-    const { screen, setScreen, resetState } = useAddHabitStore();
     const { t } = useTranslation(['errors', 'habits']);
     const { toast } = useToast();
-
-    useEffect(
-        () => () => {
-            resetState();
-        },
-        [resetState]
-    );
+    const { addHabit } = useHabitStore();
 
     const form = useForm<HabitWithoutId>({
         defaultValues: INIT_FORM_VALUES,
@@ -55,7 +49,8 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
         async (data: HabitWithoutId) => {
             try {
                 setLoading(true);
-                await habitService.addHabit(data);
+                const habit = await habitService.addHabit(data);
+                addHabit(habit);
                 toast.success(t('habits:HABIT_SAVED_SUCCESS'));
                 onClose();
             } catch (e) {
@@ -69,7 +64,7 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
                 setLoading?.(false);
             }
         },
-        [t, toast, onClose, setLoading]
+        [addHabit, toast, t, onClose]
     );
 
     const onSave = useCallback(async () => {

@@ -1,39 +1,49 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 import { firestore } from '@/libs/firebase';
 import { Habit, HabitWithoutId } from '@/types';
 
 import { getAuthUserId } from './userService';
 
-const getHabitCollectionByUID = (uid: string) => {
-    return collection(firestore, `habits/${uid}/habits`);
+const getHabitDocumentByUID = (uid: string) => {
+    return doc(firestore, `habits/${uid}`);
 };
 
 export const getHabits = async (): Promise<Habit[]> => {
     const uid = getAuthUserId();
     if (!uid) {
-        return [];
+        throw Error('User is not authorized');
     }
 
-    const habitCollection = getHabitCollectionByUID(uid);
-    const habitsSnapshot = await getDocs(habitCollection);
-    const habits: Habit[] = habitsSnapshot.docs.map((item) => ({
-        id: item.id,
-        ...(item.data() as HabitWithoutId),
-    }));
+    const docRef = getHabitDocumentByUID(uid);
+    const habitsMap = (await getDoc(docRef)).data() ?? {};
+    const habits: Habit[] = Object.values(habitsMap);
 
     return habits;
 };
 
-export const addHabit = async (
-    habit: HabitWithoutId
-): Promise<string | null> => {
+export const addHabit = async (habit: HabitWithoutId): Promise<Habit> => {
     const uid = getAuthUserId();
     if (!uid) {
-        return null;
+        throw Error('User is not authorized');
     }
 
-    const habitCollection = getHabitCollectionByUID(uid);
-    const docRef = await addDoc(habitCollection, habit);
-    return docRef.id;
+    const docRef = getHabitDocumentByUID(uid);
+    const id = uuidv4();
+
+    const newHabit: Habit = {
+        id,
+        ...habit,
+    };
+
+    await setDoc(
+        docRef,
+        {
+            [id]: newHabit,
+        },
+        { merge: true }
+    );
+
+    return newHabit;
 };

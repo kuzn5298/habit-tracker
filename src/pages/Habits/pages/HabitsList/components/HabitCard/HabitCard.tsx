@@ -3,7 +3,6 @@ import { createElement } from 'react';
 import { Checkbox } from '@/components/ui';
 import { COLORS_MAP, ICONS_MAP } from '@/constants';
 import { HabitColorType, HabitIconType } from '@/types';
-import { cn } from '@/utils/ui';
 
 interface HabitCardProps {
     name: string;
@@ -28,10 +27,8 @@ export const HabitCard: React.FC<HabitCardProps> = ({
                     <span className="truncate">{name}</span>
                     {color && (
                         <span
-                            className={cn(
-                                'flex min-w-2 h-2 rounded-full',
-                                COLORS_MAP[color]
-                            )}
+                            className="flex h-2 min-w-2 rounded-full"
+                            style={{ backgroundColor: COLORS_MAP[color] }}
                         />
                     )}
                 </p>

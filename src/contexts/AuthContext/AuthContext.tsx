@@ -4,6 +4,8 @@ import { ViewLoading } from '@/components/custom';
 import { authService } from '@/services';
 import { UserDetails } from '@/types';
 
+import { useLogoutClean } from './useLogoutClean';
+
 export interface AuthContextValue {
     isAuthenticated: boolean;
     user: UserDetails | null;
@@ -20,6 +22,8 @@ export const AuthContext = createContext<AuthContextValue>(
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<UserDetails | null>(null);
+
+    useLogoutClean();
 
     useEffect(() => {
         const authStateCallback = async (

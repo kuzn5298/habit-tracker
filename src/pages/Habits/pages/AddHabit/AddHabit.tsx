@@ -1,5 +1,5 @@
 import { AddHabitScreenEnum } from './constants';
-import { AddHabitProvider } from './context';
+import { AddHabitProvider } from './contexts';
 import { useAddHabit } from './hooks';
 import {
     AddHabitScreen,
