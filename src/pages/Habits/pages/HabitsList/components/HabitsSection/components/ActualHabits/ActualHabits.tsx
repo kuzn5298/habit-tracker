@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Habit } from '@/types';
+import { getEditHabit } from '@/utils';
 
 import { HabitCard } from '../../../HabitCard';
 
@@ -10,6 +12,7 @@ interface ActualHabitsProps {
 
 export const ActualHabits: React.FC<ActualHabitsProps> = ({ habits = [] }) => {
     const actualHabits = useMemo(() => habits.filter(() => true), [habits]);
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -23,6 +26,7 @@ export const ActualHabits: React.FC<ActualHabitsProps> = ({ habits = [] }) => {
                         icon={icon}
                         color={color}
                         completed={false}
+                        onClick={() => navigate(getEditHabit(id))}
                     />
                 ))}
             </div>

@@ -1,4 +1,10 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+    deleteField,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc,
+} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 import { firestore } from '@/libs/firebase';
@@ -46,4 +52,42 @@ export const addHabit = async (habit: HabitWithoutId): Promise<Habit> => {
     );
 
     return newHabit;
+};
+
+export const updateHabit = async (
+    habitId: string,
+    habit: HabitWithoutId
+): Promise<Habit> => {
+    const uid = getAuthUserId();
+    if (!uid) {
+        throw Error('User is not authorized');
+    }
+
+    const docRef = getHabitDocumentByUID(uid);
+
+    const newHabit: Habit = {
+        id: habitId,
+        ...habit,
+    };
+
+    await updateDoc(docRef, {
+        [habitId]: newHabit,
+    });
+
+    return newHabit;
+};
+
+export const deleteHabit = async (habitId: string): Promise<string> => {
+    const uid = getAuthUserId();
+    if (!uid) {
+        throw Error('User is not authorized');
+    }
+
+    const docRef = getHabitDocumentByUID(uid);
+
+    await updateDoc(docRef, {
+        [habitId]: deleteField(),
+    });
+
+    return habitId;
 };

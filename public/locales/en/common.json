@@ -1,8 +1,9 @@
 {
     "OK": "Ok",
-    "BACK": "Black",
+    "BACK": "Back",
     "CLOSE": "Close",
     "SAVE": "Save",
+    "DELETE": "Delete",
 
     "ENGLISH_LANGUAGE": "English",
     "RUSSIAN_LANGUAGE": "Русский",

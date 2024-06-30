@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import {
     Button,
@@ -8,6 +9,7 @@ import {
     CollapsibleTrigger,
 } from '@/components/ui';
 import { Habit } from '@/types';
+import { getEditHabit } from '@/utils';
 
 import { HabitCard } from '../../../HabitCard';
 
@@ -19,6 +21,7 @@ export const CompletedHabits: React.FC<CompletedHabitsProps> = ({
     habits = [],
 }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const completedHabits = useMemo(() => habits.filter(() => false), [habits]);
 
@@ -48,6 +51,7 @@ export const CompletedHabits: React.FC<CompletedHabitsProps> = ({
                             icon={icon}
                             color={color}
                             completed
+                            onClick={() => navigate(getEditHabit(id))}
                         />
                     )
                 )}

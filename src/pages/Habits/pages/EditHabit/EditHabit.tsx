@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 
 import { HabitScreenEnum } from '../../constants';
 import { IconsScreen, RepeatScreen, StartDateScreen } from '../../screens';
-import { AddHabitProvider } from './contexts';
-import { useAddHabit } from './hooks';
-import { AddHabitScreen } from './screens';
+import { EditHabitProvider } from './contexts';
+import { useEditHabit } from './hooks';
+import { EditHabitScreen } from './screens';
 
-const AddHabit: React.FC = () => {
-    const { screen, form, setScreen } = useAddHabit();
+const EditHabit: React.FC = () => {
+    const { screen, form, setScreen } = useEditHabit();
     const { t } = useTranslation('habits');
 
     const onBack = useCallback(
@@ -18,7 +18,7 @@ const AddHabit: React.FC = () => {
 
     switch (screen) {
         case HabitScreenEnum.MainScreen:
-            return <AddHabitScreen />;
+            return <EditHabitScreen />;
         case HabitScreenEnum.IconsScreen:
             return (
                 <IconsScreen
@@ -52,10 +52,10 @@ const AddHabit: React.FC = () => {
     }
 };
 
-const AddHabitWithContext: React.FC = (props) => (
-    <AddHabitProvider>
-        <AddHabit {...props} />
-    </AddHabitProvider>
+const EddHabitWithContext: React.FC = (props) => (
+    <EditHabitProvider>
+        <EditHabit {...props} />
+    </EditHabitProvider>
 );
 
-export default AddHabitWithContext;
+export default EddHabitWithContext;

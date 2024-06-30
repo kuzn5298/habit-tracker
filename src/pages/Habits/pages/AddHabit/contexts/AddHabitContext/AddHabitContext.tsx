@@ -7,13 +7,12 @@ import { useHabitAPI, useToast } from '@/hooks';
 import { useHabitStore } from '@/store';
 import { HabitWithoutId } from '@/types';
 
-import { AddHabitScreenEnum } from '../../constants';
-import { INIT_FORM_VALUES } from './AddHabit.constants';
-import { addHabitResolver } from './AddHabit.resolver';
+import { HabitScreenEnum, INIT_FORM_VALUES } from '../../../../constants';
+import { habitResolver } from '../../../../resolvers';
 
 export interface AddHabitContextValue {
-    screen: AddHabitScreenEnum;
-    setScreen: (screen: AddHabitScreenEnum) => void;
+    screen: HabitScreenEnum;
+    setScreen: (screen: HabitScreenEnum) => void;
     form: UseFormReturn<HabitWithoutId>;
     isLoading: boolean;
     onSave: () => void;
@@ -30,7 +29,7 @@ export const AddHabitContext = createContext<AddHabitContextValue>(
 export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
     children,
 }) => {
-    const [screen, setScreen] = useState(AddHabitScreenEnum.AddScreen);
+    const [screen, setScreen] = useState(HabitScreenEnum.MainScreen);
     const { onClose } = usePageDialog();
     const { t } = useTranslation('habits');
     const { toast } = useToast();
@@ -39,7 +38,7 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
 
     const form = useForm<HabitWithoutId>({
         defaultValues: INIT_FORM_VALUES,
-        resolver: addHabitResolver,
+        resolver: habitResolver,
     });
 
     const onFormValid = useCallback(
@@ -47,7 +46,7 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
             const { success, data } = await createHabit(habit);
             if (success) {
                 addHabit(data);
-                toast.success(t('HABIT_SAVED_SUCCESS'));
+                toast.success(t('HABIT_ADDED_SUCCESS'));
                 onClose();
             }
         },
