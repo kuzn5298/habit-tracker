@@ -12,7 +12,7 @@ import { Action } from './types';
 
 const HabitsList: React.FC = () => {
     const navigate = useNavigate();
-    const { habits } = useHabits();
+    const { habits, date, setDate } = useHabits();
 
     const actions: Action[] = useMemo(
         () => [
@@ -33,7 +33,7 @@ const HabitsList: React.FC = () => {
     return (
         <PageContainer>
             <Header actions={actions} />
-            <DatePickerSection className="sm:hidden" />
+            <DatePickerSection date={date} onChange={setDate} />
             <HabitsSection habits={habits} />
         </PageContainer>
     );

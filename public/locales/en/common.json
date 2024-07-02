@@ -12,5 +12,6 @@
     "LIGHT_THEME": "Light",
     "DARK_THEME": "Dark",
 
-    "VALIDATION_ERROR": "Validation error"
+    "VALIDATION_ERROR": "Validation error",
+    "SELECT_DATE": "Select date"
 }
