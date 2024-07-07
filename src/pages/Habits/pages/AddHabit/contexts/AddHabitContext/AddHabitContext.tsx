@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -41,21 +41,18 @@ export const AddHabitProvider: React.FC<AddHabitProviderProps> = ({
         resolver: habitResolver,
     });
 
-    const onFormValid = useCallback(
-        async (habit: HabitWithoutId) => {
-            const { success, data } = await createHabit(habit);
-            if (success) {
-                addHabit(data);
-                toast.success(t('HABIT_ADDED_SUCCESS'));
-                onClose();
-            }
-        },
-        [createHabit, addHabit, toast, t, onClose]
-    );
+    const onFormValid = async (habit: HabitWithoutId) => {
+        const { success, data } = await createHabit(habit);
+        if (success) {
+            addHabit(data);
+            toast.success(t('HABIT_ADDED_SUCCESS'));
+            onClose();
+        }
+    };
 
-    const onSave = useCallback(async () => {
+    const onSave = async () => {
         form.handleSubmit(onFormValid)();
-    }, [form, onFormValid]);
+    };
 
     return (
         <AddHabitContext.Provider

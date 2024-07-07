@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { ProviderEnum, SIGN_IN_EMAIL_LOCAL_STORAGE } from '@/constants';
 import { useAuthAPI } from '@/hooks/apis';
@@ -20,27 +20,23 @@ export const useLogin = (): UseLoginReturn => {
     } = useAuthAPI();
     const [isInboxDialog, setInboxDialog] = useState(false);
 
-    const closeInboxDialog = useCallback(() => {
+    const closeInboxDialog = () => {
         setInboxDialog(false);
-    }, []);
+    };
 
-    const signInWithProvider = useCallback(
-        async (provider: ProviderEnum): Promise<void> => {
-            await signInWithProviderAPI(provider);
-        },
-        [signInWithProviderAPI]
-    );
+    const signInWithProvider = async (
+        provider: ProviderEnum
+    ): Promise<void> => {
+        await signInWithProviderAPI(provider);
+    };
 
-    const sendSignInLinkToEmail = useCallback(
-        async (email: string): Promise<void> => {
-            const { success } = await sendSignInLinkToEmailAPI(email);
-            if (success) {
-                storage.set(SIGN_IN_EMAIL_LOCAL_STORAGE, email);
-                setInboxDialog(true);
-            }
-        },
-        [sendSignInLinkToEmailAPI]
-    );
+    const sendSignInLinkToEmail = async (email: string): Promise<void> => {
+        const { success } = await sendSignInLinkToEmailAPI(email);
+        if (success) {
+            storage.set(SIGN_IN_EMAIL_LOCAL_STORAGE, email);
+            setInboxDialog(true);
+        }
+    };
 
     return {
         isLoading,

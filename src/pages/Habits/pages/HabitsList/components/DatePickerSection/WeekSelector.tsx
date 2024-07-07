@@ -1,4 +1,4 @@
-import { HTMLAttributes, useMemo } from 'react';
+import { HTMLAttributes } from 'react';
 
 import { Button } from '@/components/ui';
 import { formatDate, getDayMinText, selectWeek } from '@/libs/date';
@@ -16,7 +16,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({
     className,
     ...props
 }) => {
-    const week = useMemo(() => selectWeek(date), [date]);
+    const week = selectWeek(date);
 
     return (
         <div

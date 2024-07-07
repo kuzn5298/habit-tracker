@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -29,13 +29,10 @@ export const UserEmailForm = ({
 
     const isInvalid = Object.keys(form.formState.errors).length > 0;
 
-    const onSubmit = useCallback(
-        async (data: EmailFormValues) => {
-            await action?.(data);
-            form.reset();
-        },
-        [action, form]
-    );
+    const onSubmit = async (data: EmailFormValues) => {
+        await action?.(data);
+        form.reset();
+    };
 
     return (
         <Form {...form}>

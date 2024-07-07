@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ export const CompletedHabits: React.FC<CompletedHabitsProps> = ({
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
-    const completedHabits = useMemo(() => habits.filter(() => false), [habits]);
+    const completedHabits = habits.filter(() => false);
 
     return (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>

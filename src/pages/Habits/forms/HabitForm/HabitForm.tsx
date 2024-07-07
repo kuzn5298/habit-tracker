@@ -32,10 +32,7 @@ export const HabitForm: React.FC<HabitFormProps> = ({ form, setScreen }) => {
     const repeatList = form.watch('repeatList');
     const startDate = form.watch('startDate');
 
-    const startDateText = useMemo(
-        () => formatDayCalendar(startDate),
-        [startDate]
-    );
+    const startDateText = formatDayCalendar(startDate);
 
     const repeatListText = useMemo(() => {
         if (repeatList.length === WEEK_DAYS.length) {

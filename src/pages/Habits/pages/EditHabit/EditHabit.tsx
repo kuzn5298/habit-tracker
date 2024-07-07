@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { HabitScreenEnum } from '../../constants';
@@ -11,10 +10,7 @@ const EditHabit: React.FC = () => {
     const { screen, form, setScreen } = useEditHabit();
     const { t } = useTranslation('habits');
 
-    const onBack = useCallback(
-        () => setScreen(HabitScreenEnum.MainScreen),
-        [setScreen]
-    );
+    const onBack = () => setScreen(HabitScreenEnum.MainScreen);
 
     switch (screen) {
         case HabitScreenEnum.MainScreen:

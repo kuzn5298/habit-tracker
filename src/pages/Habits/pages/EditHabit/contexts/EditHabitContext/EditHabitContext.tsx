@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -61,25 +61,22 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
         }
     }, [loaded, form, getHabit, habitId, onClose]);
 
-    const onFormValid = useCallback(
-        async (habit: HabitWithoutId) => {
-            if (habitId) {
-                const { success, data } = await updateHabitAPI(habitId, habit);
-                if (success) {
-                    updateHabit(data);
-                    toast.success(t('HABIT_EDITED_SUCCESS'));
-                    onClose();
-                }
+    const onFormValid = async (habit: HabitWithoutId) => {
+        if (habitId) {
+            const { success, data } = await updateHabitAPI(habitId, habit);
+            if (success) {
+                updateHabit(data);
+                toast.success(t('HABIT_EDITED_SUCCESS'));
+                onClose();
             }
-        },
-        [habitId, updateHabitAPI, updateHabit, toast, t, onClose]
-    );
+        }
+    };
 
-    const onSave = useCallback(async () => {
+    const onSave = async () => {
         form.handleSubmit(onFormValid)();
-    }, [form, onFormValid]);
+    };
 
-    const onRemove = useCallback(async () => {
+    const onRemove = async () => {
         if (habitId) {
             const { success } = await deleteHabitAPI(habitId);
             if (success) {
@@ -88,7 +85,7 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
                 onClose();
             }
         }
-    }, [deleteHabitAPI, habitId, onClose, removeHabit, t, toast]);
+    };
 
     return (
         <EditHabitContext.Provider

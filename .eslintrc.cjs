@@ -20,7 +20,7 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json',
     },
-    plugins: ['react', '@typescript-eslint', 'react-refresh'],
+    plugins: ['react', '@typescript-eslint', 'react-refresh', "react-compiler"],
     rules: {
         'react/react-in-jsx-scope': 0,
         'import/prefer-default-export': 'off',
@@ -46,6 +46,7 @@ module.exports = {
         'tailwindcss/classnames-order': 'error',
         'import/extensions': 'off',
         'react-refresh/only-export-components': 'warn',
+        'react-compiler/react-compiler': "error",
     },
     ignorePatterns: [
         '.eslintrc.cjs',

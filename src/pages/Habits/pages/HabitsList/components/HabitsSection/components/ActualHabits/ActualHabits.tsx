@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Habit } from '@/types';
@@ -11,7 +10,7 @@ interface ActualHabitsProps {
 }
 
 export const ActualHabits: React.FC<ActualHabitsProps> = ({ habits = [] }) => {
-    const actualHabits = useMemo(() => habits.filter(() => true), [habits]);
+    const actualHabits = habits.filter(() => true);
     const navigate = useNavigate();
 
     return (

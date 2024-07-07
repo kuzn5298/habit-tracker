@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -20,7 +19,7 @@ interface CheckInboxDialogProps {
 export const CheckInboxDialog: React.FC<CheckInboxDialogProps> = ({
     onClose,
 }) => {
-    const email = useMemo(() => storage.get(SIGN_IN_EMAIL_LOCAL_STORAGE), []);
+    const email = storage.get(SIGN_IN_EMAIL_LOCAL_STORAGE);
     const { t } = useTranslation(['auth', 'common']);
     return (
         <Dialog open onOpenChange={onClose}>

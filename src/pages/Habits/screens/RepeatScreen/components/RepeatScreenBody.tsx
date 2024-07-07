@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { TFunction } from 'i18next';
 import { Control, FieldValues, Path } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -34,7 +33,7 @@ export const RepeatScreenBody = <T extends FieldValues>({
 }: RepeatScreenBodyProps<T>) => {
     const { t } = useTranslation('habits');
 
-    const repeatTypes = useMemo(() => getRepeatTypes(t), [t]);
+    const repeatTypes = getRepeatTypes(t);
 
     return (
         <PageDialogBody>

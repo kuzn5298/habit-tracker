@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback } from 'react';
+import React, { Suspense } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { PageDialogWrapper, ViewLoading } from '@/components/custom';
@@ -14,9 +14,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ element, path }) => {
     const navigate = useNavigate();
     const pagePath = path === pathname;
 
-    const closeDialog = useCallback(() => {
-        navigate(path);
-    }, [navigate, path]);
+    const closeDialog = () => navigate(path);
 
     return (
         <>

@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +14,9 @@ const Page: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation('settings');
 
-    const onLogout = useCallback(() => {
+    const onLogout = () => {
         authService.signOut();
-    }, []);
+    };
 
     return (
         <PageContainer className="max-w-screen-md">

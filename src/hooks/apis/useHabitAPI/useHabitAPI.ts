@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FIREBASE_CODES_MAP } from '@/constants';
@@ -27,7 +27,7 @@ export const useHabitAPI = (): UseHabitAPI => {
     const { toast } = useToast();
     const { t } = useTranslation('errors');
 
-    const getHabits = useCallback(async (): Promise<GetHabitsAPIResponse> => {
+    const getHabits = async (): Promise<GetHabitsAPIResponse> => {
         try {
             setIsLoading(true);
             const habits = await habitService.getHabits();
@@ -43,73 +43,66 @@ export const useHabitAPI = (): UseHabitAPI => {
         } finally {
             setIsLoading?.(false);
         }
-    }, [t, toast]);
+    };
 
-    const createHabit = useCallback(
-        async (data: HabitWithoutId): Promise<CreateHabitAPIResponse> => {
-            try {
-                setIsLoading(true);
-                const habit = await habitService.addHabit(data);
-                return { success: true, data: habit };
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return { success: false, data: null };
-            } finally {
-                setIsLoading?.(false);
-            }
-        },
-        [t, toast]
-    );
+    const createHabit = async (
+        data: HabitWithoutId
+    ): Promise<CreateHabitAPIResponse> => {
+        try {
+            setIsLoading(true);
+            const habit = await habitService.addHabit(data);
+            return { success: true, data: habit };
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return { success: false, data: null };
+        } finally {
+            setIsLoading?.(false);
+        }
+    };
 
-    const updateHabit = useCallback(
-        async (
-            id: string,
-            data: HabitWithoutId
-        ): Promise<CreateHabitAPIResponse> => {
-            try {
-                setIsLoading(true);
-                const habit = await habitService.updateHabit(id, data);
-                return { success: true, data: habit };
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return { success: false, data: null };
-            } finally {
-                setIsLoading?.(false);
-            }
-        },
-        [t, toast]
-    );
+    const updateHabit = async (
+        id: string,
+        data: HabitWithoutId
+    ): Promise<CreateHabitAPIResponse> => {
+        try {
+            setIsLoading(true);
+            const habit = await habitService.updateHabit(id, data);
+            return { success: true, data: habit };
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return { success: false, data: null };
+        } finally {
+            setIsLoading?.(false);
+        }
+    };
 
-    const deleteHabit = useCallback(
-        async (id: string): Promise<APIResponse> => {
-            try {
-                setIsLoading(true);
-                await habitService.deleteHabit(id);
-                return RESPONSE_SUCCESS;
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return RESPONSE_ERROR;
-            } finally {
-                setIsLoading?.(false);
-            }
-        },
-        [t, toast]
-    );
+    const deleteHabit = async (id: string): Promise<APIResponse> => {
+        try {
+            setIsLoading(true);
+            await habitService.deleteHabit(id);
+            return RESPONSE_SUCCESS;
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return RESPONSE_ERROR;
+        } finally {
+            setIsLoading?.(false);
+        }
+    };
 
     return {
         isLoading,

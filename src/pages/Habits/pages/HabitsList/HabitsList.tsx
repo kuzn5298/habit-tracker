@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { CirclePlus, SettingsIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,21 +13,18 @@ const HabitsList: React.FC = () => {
     const navigate = useNavigate();
     const { habits, date, setDate } = useHabits();
 
-    const actions: Action[] = useMemo(
-        () => [
-            {
-                id: 'add-habit',
-                icon: <CirclePlus />,
-                onClick: () => navigate(AppRouteEnum.ADD_HABIT),
-            },
-            {
-                id: 'settings',
-                icon: <SettingsIcon />,
-                onClick: () => navigate(AppRouteEnum.SETTINGS),
-            },
-        ],
-        [navigate]
-    );
+    const actions: Action[] = [
+        {
+            id: 'add-habit',
+            icon: <CirclePlus />,
+            onClick: () => navigate(AppRouteEnum.ADD_HABIT),
+        },
+        {
+            id: 'settings',
+            icon: <SettingsIcon />,
+            onClick: () => navigate(AppRouteEnum.SETTINGS),
+        },
+    ];
 
     return (
         <PageContainer>

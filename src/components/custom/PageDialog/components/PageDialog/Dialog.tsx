@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback } from 'react';
+import React, { Suspense } from 'react';
 
 import { ViewLoading } from '@/components/custom';
 import { DialogContent, DialogDescription, DialogTitle } from '@/components/ui';
@@ -13,9 +13,9 @@ const Dialog: React.FC<DialogProps> = ({
     loading,
     className,
 }) => {
-    const onInteractOutside = useCallback((e: Event) => {
+    const onInteractOutside = (e: Event) => {
         e.preventDefault();
-    }, []);
+    };
 
     return (
         <DialogContent

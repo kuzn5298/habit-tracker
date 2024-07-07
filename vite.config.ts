@@ -1,11 +1,11 @@
 import { resolve } from 'path';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+import { ManifestOptions, VitePWA } from 'vite-plugin-pwa';
 
 const root = resolve(__dirname, './src');
 
-const manifest = {
+const manifest: Partial<ManifestOptions> = {
     name: 'Habit Tracker',
     short_name: 'Habit Tracker',
     theme_color: '#212330',
@@ -36,21 +36,21 @@ const manifest = {
     ],
 };
 
+const ReactCompilerConfig = {};
+
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        react(),
+        react({
+            babel: {
+                plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
+            },
+        }),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: [
-                'favicon.ico',
-                'apple-touch-icon.png',
-                'mask-icon.svg',
-            ],
             manifest,
             pwaAssets: {
                 config: true,
-                overrideManifestIcons: true,
             },
         }),
     ],

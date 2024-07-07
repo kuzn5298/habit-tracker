@@ -48,10 +48,7 @@ export const HabitsProvider: React.FC<HabitsProviderProps> = ({ children }) => {
         }
     }, [fetchHabits, loaded]);
 
-    const dateHabits = useMemo(
-        () => filterHabitsByDate(habits, selectDate),
-        [habits, selectDate]
-    );
+    const dateHabits = filterHabitsByDate(habits, selectDate);
 
     const contextValue = useMemo<HabitsContextValue>(
         () => ({

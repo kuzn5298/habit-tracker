@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FIREBASE_CODES_MAP, ProviderEnum } from '@/constants';
@@ -20,62 +20,57 @@ export const useAuthAPI = (): UseAuthAPI => {
     const { toast } = useToast();
     const { t } = useTranslation('errors');
 
-    const signInWithProvider = useCallback(
-        async (provider: ProviderEnum): Promise<APIResponse> => {
-            try {
-                await authService.signInWithProvider(provider);
-                return RESPONSE_SUCCESS;
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return RESPONSE_ERROR;
-            }
-        },
-        [t, toast]
-    );
+    const signInWithProvider = async (
+        provider: ProviderEnum
+    ): Promise<APIResponse> => {
+        try {
+            await authService.signInWithProvider(provider);
+            return RESPONSE_SUCCESS;
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return RESPONSE_ERROR;
+        }
+    };
 
-    const signInByEmail = useCallback(
-        async (email: string): Promise<APIResponse> => {
-            try {
-                await authService.signInByEmailLink(email);
-                return RESPONSE_SUCCESS;
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return RESPONSE_ERROR;
-            }
-        },
-        [t, toast]
-    );
+    const signInByEmail = async (email: string): Promise<APIResponse> => {
+        try {
+            await authService.signInByEmailLink(email);
+            return RESPONSE_SUCCESS;
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return RESPONSE_ERROR;
+        }
+    };
 
-    const sendSignInLinkToEmail = useCallback(
-        async (email: string): Promise<APIResponse> => {
-            try {
-                setIsLoading(true);
-                await authService.sendSignInLinkToEmail(email);
-                return RESPONSE_SUCCESS;
-            } catch (e) {
-                const message = getFirebaseTranslationMessage(
-                    e,
-                    FIREBASE_CODES_MAP,
-                    t
-                );
-                toast.error(message);
-                return RESPONSE_ERROR;
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [t, toast]
-    );
+    const sendSignInLinkToEmail = async (
+        email: string
+    ): Promise<APIResponse> => {
+        try {
+            setIsLoading(true);
+            await authService.sendSignInLinkToEmail(email);
+            return RESPONSE_SUCCESS;
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return RESPONSE_ERROR;
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return {
         isLoading,
