@@ -27,6 +27,7 @@ const habitSchema: yup.ObjectSchema<HabitWithoutId> = yup.object().shape({
         .of(yup.mixed<WeekDayEnum | number>().required())
         .min(1, t('inputs:HABIT_REPEAT_LIST_REQUIRED'))
         .required(t('inputs:HABIT_REPEAT_LIST_REQUIRED')),
+    completed: yup.bool(),
 });
 
 export const habitResolver = yupResolver(habitSchema);
