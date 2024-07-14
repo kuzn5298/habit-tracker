@@ -12,4 +12,5 @@ export * from './switch';
 export * from './textarea';
 export * from './calendar';
 export * from './tabs';
+export * from './tooltip';
 export * from './skeleton';

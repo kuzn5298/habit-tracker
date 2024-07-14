@@ -11,6 +11,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
 } from '@/components/ui';
 import { formatDate } from '@/libs/date';
 
@@ -36,11 +40,20 @@ export const CalendarDialog: React.FC<CalendarDialogProps> = ({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button variant="ghost" size="icon">
-                    <CalendarFold className="size-6" />
-                </Button>
-            </DialogTrigger>
+            <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <DialogTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                                <CalendarFold className="size-6" />
+                            </Button>
+                        </DialogTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>{t('SELECT_DATE')}</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
             <DialogContent className="max-w-[324px]">
                 <DialogHeader>
                     <DialogTitle>{t('SELECT_DATE')}</DialogTitle>

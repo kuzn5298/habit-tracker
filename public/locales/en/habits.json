@@ -12,5 +12,7 @@
     "HABIT_ADDED_SUCCESS": "Habit added successfully",
     "HABIT_EDITED_SUCCESS": "Habit edited successfully",
     "HABIT_DELETED_SUCCESS": "Habit deleted successfully",
-    "HABIT_REPEAT_ALL_DAYS": "Every day"
+    "HABIT_REPEAT_ALL_DAYS": "Every day",
+
+    "HABITS_PER_DAY": "{{day}} habits"
 }

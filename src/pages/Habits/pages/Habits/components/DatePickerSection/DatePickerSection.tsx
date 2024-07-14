@@ -1,7 +1,14 @@
 import { HTMLAttributes } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-import { Button } from '@/components/ui';
+import {
+    Button,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui';
 import { useBreakpoint } from '@/hooks';
 import { formatDate } from '@/libs/date';
 
@@ -19,6 +26,7 @@ export const DatePickerSection: React.FC<DatePickerSectionProps> = ({
     onChange,
 }) => {
     const isMobile = useBreakpoint('sm');
+    const { t } = useTranslation();
 
     const shiftDay = (shift: number) => {
         const d = new Date(date);
@@ -35,20 +43,38 @@ export const DatePickerSection: React.FC<DatePickerSectionProps> = ({
                     {formatDate(date, isMobile ? 'MMMM YYYY' : 'MMMM D, YYYY')}
                 </div>
                 <div className="flex gap-2">
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => shiftDay(-1)}
-                    >
-                        <ChevronLeft className="size-5" />
-                    </Button>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => shiftDay(1)}
-                    >
-                        <ChevronRight className="size-5" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => shiftDay(-1)}
+                                >
+                                    <ChevronLeft className="size-5" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{t('PREVIOUS_DAY')}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => shiftDay(1)}
+                                >
+                                    <ChevronRight className="size-5" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{t('NEXT_DAY')}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
             {isMobile && <WeekSelector date={date} onChange={onChange} />}

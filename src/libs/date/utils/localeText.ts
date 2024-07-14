@@ -9,3 +9,7 @@ export const getDayText = (day: WeekDayEnum): string | null => {
 export const getDayMinText = (day: WeekDayEnum): string | null => {
     return dayjs.weekdaysMin()?.[day] ?? null;
 };
+
+export const getDayFromDate = (date: string): WeekDayEnum => {
+    return dayjs(date).day();
+};

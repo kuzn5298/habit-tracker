@@ -13,5 +13,7 @@
     "DARK_THEME": "Dark",
 
     "VALIDATION_ERROR": "Validation error",
-    "SELECT_DATE": "Select date"
+    "SELECT_DATE": "Select date",
+    "NEXT_DAY": "Next day",
+    "PREVIOUS_DAY": "Previous day"
 }

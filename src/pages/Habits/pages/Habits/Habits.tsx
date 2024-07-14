@@ -1,4 +1,5 @@
 import { CirclePlus, SettingsIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { PageContainer } from '@/components/app';
@@ -11,6 +12,7 @@ import { Action } from './types';
 
 const Habits: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation(['habits', 'settings']);
     const { habits, date, setDate, onComplete, isLoading } = useHabits();
 
     const actions: Action[] = [
@@ -18,17 +20,19 @@ const Habits: React.FC = () => {
             id: 'add-habit',
             icon: <CirclePlus />,
             onClick: () => navigate(AppRouteEnum.ADD_HABIT),
+            tooltip: t('habits:ADD_HABIT'),
         },
         {
             id: 'settings',
             icon: <SettingsIcon />,
             onClick: () => navigate(AppRouteEnum.SETTINGS),
+            tooltip: t('settings:SETTINGS_TEXT'),
         },
     ];
 
     return (
         <PageContainer>
-            <Header actions={actions} />
+            <Header actions={actions} date={date} />
             <DatePickerSection date={date} onChange={setDate} />
             <HabitsSection
                 habits={habits}
