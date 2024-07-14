@@ -1,4 +1,4 @@
-import { createElement, HTMLAttributes } from 'react';
+import { createElement, HTMLAttributes, MouseEvent } from 'react';
 
 import { Checkbox } from '@/components/ui';
 import { COLORS_MAP, ICONS_MAP } from '@/constants';
@@ -11,6 +11,7 @@ interface HabitCardProps extends HTMLAttributes<HTMLDivElement> {
     color?: HabitColorType;
     icon?: HabitIconType;
     completed?: boolean;
+    onComplete?: (state: boolean) => void;
 }
 
 export const HabitCard: React.FC<HabitCardProps> = ({
@@ -20,8 +21,14 @@ export const HabitCard: React.FC<HabitCardProps> = ({
     icon,
     completed,
     className,
+    onComplete,
     ...props
 }) => {
+    const handleComplete = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        onComplete?.(!completed);
+    };
+
     return (
         <div
             className={cn(
@@ -32,7 +39,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({
         >
             {icon && createElement(ICONS_MAP[icon])}
             <div className="grid flex-1 gap-0.5">
-                <p className="flex items-center gap-2 overflow-hidden text-sm font-medium leading-4">
+                <p className="flex items-center gap-2 overflow-hidden text-base font-medium leading-4">
                     <span className="truncate">{name}</span>
                     {color && (
                         <span
@@ -47,7 +54,11 @@ export const HabitCard: React.FC<HabitCardProps> = ({
                     </p>
                 )}
             </div>
-            <Checkbox className="size-6" checked={completed} />
+            <Checkbox
+                className="size-6"
+                checked={completed}
+                onClick={handleComplete}
+            />
         </div>
     );
 };

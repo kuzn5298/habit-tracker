@@ -9,9 +9,9 @@ import { HabitsProvider } from './contexts';
 import { useHabits } from './hooks';
 import { Action } from './types';
 
-const HabitsList: React.FC = () => {
+const Habits: React.FC = () => {
     const navigate = useNavigate();
-    const { habits, date, setDate } = useHabits();
+    const { habits, date, setDate, onComplete, isLoading } = useHabits();
 
     const actions: Action[] = [
         {
@@ -30,14 +30,18 @@ const HabitsList: React.FC = () => {
         <PageContainer>
             <Header actions={actions} />
             <DatePickerSection date={date} onChange={setDate} />
-            <HabitsSection habits={habits} />
+            <HabitsSection
+                habits={habits}
+                onComplete={onComplete}
+                isLoading={isLoading}
+            />
         </PageContainer>
     );
 };
 
 const HabitsListWithContext: React.FC = (props) => (
     <HabitsProvider>
-        <HabitsList {...props} />
+        <Habits {...props} />
     </HabitsProvider>
 );
 

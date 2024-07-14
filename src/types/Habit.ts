@@ -10,6 +10,7 @@ type HabitDetails = {
     color?: HabitColorType;
     icon?: HabitIconType;
     startDate: string;
+    completed?: boolean;
 };
 
 export enum HabitRepeatTypeEnum {
@@ -32,3 +33,15 @@ type RepeatPayload = DailyRepeat | MonthlyRepeat;
 export type Habit = HabitDetails & RepeatPayload;
 
 export type HabitWithoutId = Omit<Habit, 'id'>;
+
+export interface HabitsCompletedByDate {
+    [year: string]: {
+        [month: string]: {
+            [day: string]: {
+                [habitId: string]: {
+                    completed: boolean;
+                };
+            };
+        };
+    };
+}

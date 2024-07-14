@@ -1,6 +1,6 @@
 {
     "name": "habit-tracker",
-    "version": "0.0.1",
+    "version": "0.6.0",
     "type": "module",
     "author": {
         "email": "kuzn5298@gmail.com",
@@ -39,6 +39,7 @@
         "i18next": "^23.11.5",
         "i18next-browser-languagedetector": "^8.0.0",
         "i18next-http-backend": "^2.5.2",
+        "lodash": "^4.17.21",
         "lucide-react": "^0.400.0",
         "react": "^19.0.0-rc-fb9a90fa48-20240614",
         "react-day-picker": "^8.10.1",
@@ -55,6 +56,7 @@
     },
     "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "^4.3.0",
+        "@types/lodash": "^4.17.6",
         "@types/node": "^20.14.10",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",

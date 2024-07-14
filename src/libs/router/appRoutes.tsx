@@ -2,7 +2,7 @@ import { Navigate, RouteObject } from 'react-router-dom';
 
 import { PageWrapper, PrivateRoute, PublicRoute } from '@/components/app';
 import { AppRouteEnum } from '@/constants';
-import { HabitsList, NotFound, Settings } from '@/pages';
+import { Habits, NotFound, Settings } from '@/pages';
 
 import AUTH_ROUTES from './authRoutes';
 import HABITS_ROUTES from './habitsRoutes';
@@ -19,7 +19,7 @@ const APP_ROUTES: RouteObject[] = [
             <PrivateRoute
                 element={
                     <PageWrapper
-                        element={<HabitsList />}
+                        element={<Habits />}
                         path={AppRouteEnum.HABITS}
                     />
                 }

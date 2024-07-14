@@ -35,7 +35,8 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
     const { onClose } = usePageDialog();
     const { t } = useTranslation('habits');
     const { toast } = useToast();
-    const { getHabit, updateHabit, loaded, removeHabit } = useHabitStore();
+    const { getHabit, updateHabit, habitsLoaded, removeHabit } =
+        useHabitStore();
     const {
         isLoading: isApiLoading,
         updateHabit: updateHabitAPI,
@@ -43,7 +44,7 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
     } = useHabitAPI();
 
     const { habitId } = useParams();
-    const isLoading = !loaded || isApiLoading;
+    const isLoading = !habitsLoaded || isApiLoading;
 
     const form = useForm<HabitWithoutId>({
         defaultValues: INIT_FORM_VALUES,
@@ -51,7 +52,7 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
     });
 
     useEffect(() => {
-        if (loaded) {
+        if (habitsLoaded) {
             const habit = habitId ? getHabit(habitId) : null;
             if (habit) {
                 form.reset(habit);
@@ -59,7 +60,7 @@ export const EditHabitProvider: React.FC<EditHabitProviderProps> = ({
                 onClose();
             }
         }
-    }, [loaded, form, getHabit, habitId, onClose]);
+    }, [habitsLoaded, form, getHabit, habitId, onClose]);
 
     const onFormValid = async (habit: HabitWithoutId) => {
         if (habitId) {
