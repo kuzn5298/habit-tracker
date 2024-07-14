@@ -25,7 +25,9 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({
         >
             {week.map((d, i) => (
                 <div key={d} className="flex flex-col gap-2">
-                    <div className="text-center">{getDayMinText(i)}</div>
+                    <div className="text-center capitalize">
+                        {getDayMinText(i)}
+                    </div>
                     <div>
                         <Button
                             variant={d === date ? 'default' : 'ghost'}

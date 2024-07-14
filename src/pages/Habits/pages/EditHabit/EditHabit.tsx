@@ -48,10 +48,20 @@ const EditHabit: React.FC = () => {
     }
 };
 
-const EddHabitWithContext: React.FC = (props) => (
-    <EditHabitProvider>
-        <EditHabit {...props} />
-    </EditHabitProvider>
-);
+const EddHabitWithContext: React.FC = (props) => {
+    const { t } = useTranslation();
+    return (
+        <>
+            <title>
+                {t('common:APP_SUBTITLE', {
+                    subtitle: t('habits:EDIT_HABIT'),
+                })}
+            </title>
+            <EditHabitProvider>
+                <EditHabit {...props} />
+            </EditHabitProvider>
+        </>
+    );
+};
 
 export default EddHabitWithContext;

@@ -9,14 +9,21 @@ import {
 import ThemeBody from './ThemeBody';
 
 const Theme: React.FC = () => {
-    const { t } = useTranslation(['common', 'settings']);
+    const { t } = useTranslation('settings');
 
     return (
-        <PageDialog
-            header={<PageDialogHeader title={t('settings:THEME_TEXT')} />}
-            body={<ThemeBody />}
-            footer={<PageDialogFooter closeButton />}
-        />
+        <>
+            <title>
+                {t('common:APP_SUBTITLE', {
+                    subtitle: t('THEME_TEXT'),
+                })}
+            </title>
+            <PageDialog
+                header={<PageDialogHeader title={t('THEME_TEXT')} />}
+                body={<ThemeBody />}
+                footer={<PageDialogFooter closeButton />}
+            />
+        </>
     );
 };
 

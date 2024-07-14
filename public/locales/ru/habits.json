@@ -1,0 +1,18 @@
+{
+    "ADD_HABIT": "Добавить привычку",
+    "EDIT_HABIT": "Редактировать привычку",
+    "HABIT_NAME": "Название",
+    "HABIT_DESCRIPTION": "Описание",
+    "HABIT_REPEAT": "Повтор",
+    "HABIT_REPEAT_DAYS": "Дни",
+    "HABIT_REPEAT_MONTHS": "Месяцы",
+    "HABIT_ICON": "Иконка",
+    "HABIT_START_DATE": "Дата начала",
+
+    "HABIT_ADDED_SUCCESS": "Привычка успешно добавлена",
+    "HABIT_EDITED_SUCCESS": "Привычка успешно отредактирована",
+    "HABIT_DELETED_SUCCESS": "Привычка успешно удалена",
+    "HABIT_REPEAT_ALL_DAYS": "Каждый день",
+
+    "HABITS_PER_DAY": "Привычки в {{day}}"
+}

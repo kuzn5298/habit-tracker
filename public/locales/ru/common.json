@@ -2,11 +2,18 @@
     "OK": "Ок",
     "BACK": "Назад",
     "CLOSE": "Закрыть",
-
-    "ENGLISH_LANGUAGE": "English",
-    "RUSSIAN_LANGUAGE": "Русский",
+    "SAVE": "Сохранить",
+    "DELETE": "Удалить",
 
     "SYSTEM_THEME": "Системная",
     "LIGHT_THEME": "Светлая",
-    "DARK_THEME": "Темная"
+    "DARK_THEME": "Темная",
+
+    "VALIDATION_ERROR": "Ошибка валидации",
+    "SELECT_DATE": "Выберите дату",
+    "NEXT_DAY": "Следующий день",
+    "PREVIOUS_DAY": "Предыдущий день",
+
+    "APP_TITLE": "Трекер Привычек",
+    "APP_SUBTITLE": "{{subtitle}} | Трекер Привычек"
 }

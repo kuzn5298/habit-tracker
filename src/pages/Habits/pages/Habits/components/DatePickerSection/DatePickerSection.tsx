@@ -39,7 +39,7 @@ export const DatePickerSection: React.FC<DatePickerSectionProps> = ({
         <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 sm:gap-3">
                 <CalendarDialog date={date} onChange={onChange} />
-                <div className="flex-1 text-xl font-semibold sm:text-2xl">
+                <div className="flex-1 text-xl font-semibold capitalize sm:text-2xl">
                     {formatDate(date, isMobile ? 'MMMM YYYY' : 'MMMM D, YYYY')}
                 </div>
                 <div className="flex gap-2">

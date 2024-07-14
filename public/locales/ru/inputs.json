@@ -1,5 +1,11 @@
 {
-    "EMAIL_LABEL": "Почта",
+    "EMAIL_LABEL": "Электронная почта",
     "EMAIL_PLACEHOLDER": "name@example.com",
-    "EMAIL_REQUIRED": "Пожалуйста, введите адрес электронной почты."
+    "EMAIL_REQUIRED": "Пожалуйста, введите адрес электронной почты.",
+    "EMAIL_INVALID": "Пожалуйста, введите действительный адрес электронной почты.",
+
+    "HABIT_NAME_REQUIRED": "Пожалуйста, введите название привычки.",
+    "HABIT_START_DATE_REQUIRED": "Пожалуйста, выберите дату начала.",
+    "HABIT_REPEAT_TYPE_REQUIRED": "Пожалуйста, выберите тип повтора.",
+    "HABIT_REPEAT_LIST_REQUIRED": "Пожалуйста, выберите список повторов."
 }

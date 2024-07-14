@@ -15,5 +15,8 @@
     "VALIDATION_ERROR": "Validation error",
     "SELECT_DATE": "Select date",
     "NEXT_DAY": "Next day",
-    "PREVIOUS_DAY": "Previous day"
+    "PREVIOUS_DAY": "Previous day",
+
+    "APP_TITLE": "Habit Tracker",
+    "APP_SUBTITLE": "{{subtitle}} | Habit Tracker"
 }

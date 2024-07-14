@@ -48,10 +48,21 @@ const AddHabit: React.FC = () => {
     }
 };
 
-const AddHabitWithContext: React.FC = (props) => (
-    <AddHabitProvider>
-        <AddHabit {...props} />
-    </AddHabitProvider>
-);
+const AddHabitWithContext: React.FC = (props) => {
+    const { t } = useTranslation();
+
+    return (
+        <>
+            <title>
+                {t('common:APP_SUBTITLE', {
+                    subtitle: t('habits:ADD_HABIT'),
+                })}
+            </title>
+            <AddHabitProvider>
+                <AddHabit {...props} />
+            </AddHabitProvider>
+        </>
+    );
+};
 
 export default AddHabitWithContext;

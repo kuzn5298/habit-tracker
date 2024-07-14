@@ -42,6 +42,7 @@ export const WeekDayPickerControlled = <T extends FieldValues>({
                                     ) : undefined
                                 }
                                 onClick={handleClick}
+                                className="capitalize"
                             >
                                 {getDayText(day)}
                             </PageButton>
