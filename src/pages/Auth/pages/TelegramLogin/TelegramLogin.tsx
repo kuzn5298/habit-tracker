@@ -24,6 +24,7 @@ const TelegramLogin = () => {
     useEffect(() => {
         const authenticateUser = async () => {
             isCalled.current = true;
+
             if (
                 isTelegramApp &&
                 (await verifyTelegramAuth(tgData, TELEGRAM_BOT_TOKEN))

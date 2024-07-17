@@ -6,7 +6,7 @@ import {
     useState,
 } from 'react';
 
-import { expandTelegramApp, transformData } from './helpers';
+import { loadScript, transformData } from './helpers';
 
 export interface TelegramContextValue {
     isTelegramApp: boolean;
@@ -26,6 +26,7 @@ export const TelegramContext = createContext<TelegramContextValue>(
 export const TelegramProvider: React.FC<TelegramProviderProps> = ({
     children,
 }) => {
+    const [isScriptLoaded, setIsScriptLoaded] = useState(false);
     const [isTelegramApp, setIsTelegramApp] = useState(false);
     const [tgColorTheme, setTgColorTheme] = useState<Record<string, string>>(
         {}
@@ -34,11 +35,32 @@ export const TelegramProvider: React.FC<TelegramProviderProps> = ({
     const [tgUser, setTgUser] = useState<Record<string, string>>({});
 
     useEffect(() => {
-        expandTelegramApp();
-    }, []);
+        if (isTelegramApp && !isScriptLoaded) {
+            const loadTelegramScript = async () => {
+                if (window.Telegram === undefined) {
+                    try {
+                        await loadScript(
+                            'https://telegram.org/js/telegram-web-app.js'
+                        );
+                        setIsScriptLoaded(true);
+                    } catch {
+                        /* empty */
+                    }
+                }
+            };
+
+            loadTelegramScript();
+        }
+    }, [isScriptLoaded, isTelegramApp]);
+
+    useEffect(() => {
+        if (isScriptLoaded) {
+            window.Telegram.WebApp.expand();
+        }
+    }, [isScriptLoaded]);
 
     useLayoutEffect(() => {
-        const dataString = window.location.hash.substring(1);
+        const dataString = window.location.hash?.substring(1) ?? '';
         const { tgWebAppData, tgWebAppThemeParams } = transformData(dataString);
         if (tgWebAppData) {
             const data = transformData(tgWebAppData) ?? {};

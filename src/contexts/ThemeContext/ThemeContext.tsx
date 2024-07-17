@@ -7,7 +7,10 @@ import {
 } from 'react';
 
 import { ThemeEnum } from '@/constants';
+import { useTelegramApp } from '@/hooks';
 import { getTheme, isValidTheme, setTheme, setThemeToStorage } from '@/utils';
+
+import { clearCustomColors, setCustomTelegramColors } from './helpers';
 
 export interface ThemeContextValue {
     theme: ThemeEnum;
@@ -24,6 +27,7 @@ export const ThemeContext = createContext<ThemeContextValue>(
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [contextTheme, setContextTheme] = useState(getTheme);
+    const { isTelegramApp, tgColorTheme } = useTelegramApp();
 
     useLayoutEffect(() => {
         setTheme(contextTheme);
@@ -43,6 +47,22 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             useDark.removeEventListener('change', listener);
         };
     }, [contextTheme]);
+
+    // set custom theme
+    useLayoutEffect(() => {
+        let isCustomColors = false;
+        if (contextTheme === ThemeEnum.SYSTEM) {
+            if (isTelegramApp && tgColorTheme) {
+                isCustomColors = true;
+                setCustomTelegramColors(tgColorTheme);
+            }
+        }
+        return () => {
+            if (isCustomColors) {
+                clearCustomColors();
+            }
+        };
+    }, [contextTheme, isTelegramApp, tgColorTheme]);
 
     const setNewContextTheme = useCallback((theme: ThemeEnum) => {
         if (isValidTheme(theme)) {
