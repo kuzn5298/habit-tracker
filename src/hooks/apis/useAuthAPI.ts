@@ -13,6 +13,7 @@ interface UseAuthAPI {
     signInWithProvider: (provider: ProviderEnum) => Promise<APIResponse>;
     signInByEmail: (email: string) => Promise<APIResponse>;
     sendSignInLinkToEmail: (email: string) => Promise<APIResponse>;
+    signInAnonymously: () => Promise<APIResponse>;
 }
 
 export const useAuthAPI = (): UseAuthAPI => {
@@ -52,6 +53,21 @@ export const useAuthAPI = (): UseAuthAPI => {
         }
     };
 
+    const signInAnonymously = async (): Promise<APIResponse> => {
+        try {
+            await authService.signInAnonymously();
+            return RESPONSE_SUCCESS;
+        } catch (e) {
+            const message = getFirebaseTranslationMessage(
+                e,
+                FIREBASE_CODES_MAP,
+                t
+            );
+            toast.error(message);
+            return RESPONSE_ERROR;
+        }
+    };
+
     const sendSignInLinkToEmail = async (
         email: string
     ): Promise<APIResponse> => {
@@ -77,5 +93,6 @@ export const useAuthAPI = (): UseAuthAPI => {
         signInWithProvider,
         sendSignInLinkToEmail,
         signInByEmail,
+        signInAnonymously,
     };
 };

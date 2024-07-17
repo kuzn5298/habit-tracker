@@ -4,5 +4,6 @@ export * from './useToast';
 export * from './useMedia';
 export * from './useBreakpoints';
 export * from './useAuth';
+export * from './useTelegramApp';
 
 export * from './apis';

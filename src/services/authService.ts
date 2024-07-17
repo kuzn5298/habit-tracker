@@ -2,6 +2,7 @@ import {
     isSignInWithEmailLink as firebaseIsSignInWithEmailLink,
     onAuthStateChanged as firebaseOnAuthStateChanged,
     sendSignInLinkToEmail as firebaseSendSignInLinkToEmail,
+    signInAnonymously as firebaseSignInAnonymously,
     signInWithEmailLink as firebaseSignInWithEmailLink,
     signInWithPopup as firebaseSignInWithPopup,
     signOut as firebaseSignOut,
@@ -35,6 +36,11 @@ export const signInByEmailLink = async (
         email,
         window.location.href
     );
+    return getUserDetails(user);
+};
+
+export const signInAnonymously = async (): Promise<UserDetails> => {
+    const { user } = await firebaseSignInAnonymously(auth);
     return getUserDetails(user);
 };
 

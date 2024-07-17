@@ -3,6 +3,7 @@ export enum AppRouteEnum {
 
     // Auth
     LOGIN = '/login',
+    TELEGRAM_LOGIN = '/login-with-telegram',
     VERIFICATION = '/verification',
 
     // Habits

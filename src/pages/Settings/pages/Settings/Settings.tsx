@@ -6,11 +6,15 @@ import { PageContainer } from '@/components/app';
 import { PageButton } from '@/components/custom';
 import { Button } from '@/components/ui';
 import { AppRouteEnum } from '@/constants';
+import { useTelegramApp } from '@/hooks';
 import { authService } from '@/services';
 
 const Page: React.FC = () => {
+    const { isTelegramApp } = useTelegramApp();
     const navigate = useNavigate();
     const { t } = useTranslation('settings');
+
+    const isLogout = !isTelegramApp;
 
     const onLogout = () => {
         authService.signOut();
@@ -53,9 +57,11 @@ const Page: React.FC = () => {
                     >
                         {t('LANGUAGE_TEXT')}
                     </PageButton>
-                    <PageButton onClick={onLogout}>
-                        {t('LOGOUT_TEXT')}
-                    </PageButton>
+                    {isLogout && (
+                        <PageButton onClick={onLogout}>
+                            {t('LOGOUT_TEXT')}
+                        </PageButton>
+                    )}
                 </div>
             </PageContainer>
         </>
